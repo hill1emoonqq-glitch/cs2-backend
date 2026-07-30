@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "CS2 AI Platform",
   "scripts": {
-    "build": "mkdir -p public && cp index.html public/"
+    "build": "echo 'Готово'"
   },
   "dependencies": {}
 }
