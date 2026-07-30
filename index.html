@@ -13,7 +13,7 @@
             font-family: 'Arial', sans-serif;
             overflow-x: hidden;
         }
-        /* Главный экран приветствия с крутым и рабочим фоном CS2 */
+        /* Главный экран приветствия с рабочим фоном CS2 */
         .welcome-slide {
             height: 100vh;
             display: flex;
@@ -22,8 +22,8 @@
             align-items: center;
             padding: 20px;
             box-sizing: border-box;
-            background: linear-gradient(180deg, rgba(11, 14, 20, 0.4) 0%, rgba(11, 14, 20, 0.85) 100%), 
-                        url('https://fancensus.com');
+            background: linear-gradient(180deg, rgba(11, 14, 20, 0.4) 0%, rgba(11, 14, 20, 0.9) 100%), 
+                        url('https://steamstatic.com');
             background-size: cover;
             background-position: center;
             position: relative;
@@ -48,7 +48,6 @@
             font-weight: bold;
             font-size: 20px;
             box-shadow: 0 0 15px rgba(255, 106, 0, 0.4);
-            user-select: none;
         }
         .lang-select {
             background: rgba(26, 31, 41, 0.85);
@@ -59,21 +58,20 @@
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
-            outline: none;
         }
         /* Огромный маркетинговый слоган */
         .slogan-container {
             text-align: center;
             max-width: 1000px;
             z-index: 10;
-            background: rgba(11, 14, 20, 0.65);
-            backdrop-filter: blur(4px);
-            padding: 35px;
+            background: rgba(11, 14, 20, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 40px;
             border-radius: 15px;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
         .slogan {
-            font-size: 40px;
+            font-size: 38px;
             font-weight: 900;
             text-transform: uppercase;
             line-height: 1.4;
@@ -84,7 +82,7 @@
         .t-text { color: #FF6A00; text-shadow: 0 0 20px rgba(255, 106, 0, 0.6); }
         .server-text {
             display: block;
-            font-size: 54px;
+            font-size: 50px;
             color: #FFFFFF;
             text-shadow: 0 0 30px rgba(255, 255, 255, 0.9);
             margin-top: 15px;
@@ -117,15 +115,15 @@
             border-radius: 10px;
         }
 
-        /* МОДАЛЬНОЕ ОКНО РЕГИСТРАЦИИ (Исправлено) */
+        /* МОДАЛЬНОЕ ОКНО */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(5, 7, 10, 0.9);
-            display: none; /* Переключили на стандартный контролируемый тип */
+            background: rgba(5, 7, 10, 0.95);
+            display: none;
             justify-content: center;
             align-items: center;
             z-index: 100;
@@ -142,11 +140,10 @@
             position: relative;
         }
         .modal-title {
-            font-size: 26px;
+            font-size: 24px;
             font-weight: bold;
             margin-bottom: 25px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
         .input-field {
             width: 100%;
@@ -159,31 +156,22 @@
             box-sizing: border-box;
             margin-bottom: 20px;
             outline: none;
-            transition: border-color 0.2s;
         }
-        .input-field:focus { border-color: #00A3FF; }
         .auth-buttons {
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
         .auth-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
             padding: 14px;
             border-radius: 5px;
             font-weight: bold;
             cursor: pointer;
             border: none;
             font-size: 16px;
-            transition: background 0.2s;
         }
         .btn-steam { background: #171a21; color: white; border: 1px solid #2a475e; }
-        .btn-steam:hover { background: #2a475e; }
         .btn-faceit { background: #ff5500; color: white; }
-        .btn-faceit:hover { background: #e04b00; }
         .close-modal {
             position: absolute;
             top: 15px;
@@ -192,18 +180,17 @@
             cursor: pointer;
             color: #666;
         }
-        .close-modal:hover { color: white; }
 
         /* СЕТКА ИЗ 20 КРУЖКОВ */
         .circles-section {
             max-width: 1200px;
-            margin: 60px auto;
+            margin: 80px auto;
             padding: 0 20px;
         }
         .circles-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 25px;
+            gap: 30px;
             justify-items: center;
         }
         .circle-card {
@@ -223,12 +210,12 @@
             box-sizing: border-box;
         }
         .circle-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: #FF6A00;
-            box-shadow: 0 0 20px rgba(255, 106, 0, 0.3);
+            box-shadow: 0 0 25px rgba(255, 106, 0, 0.4);
         }
-        .circle-icon { font-size: 32px; margin-bottom: 8px; }
-        .circle-title { font-size: 14px; font-weight: bold; text-transform: uppercase; }
+        .circle-icon { font-size: 36px; margin-bottom: 8px; }
+        .circle-title { font-size: 13px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
 
         /* НИЖНИЕ БЛОКИ */
         .bottom-sections {
@@ -244,20 +231,12 @@
             border: 1px solid #1A1F29;
             border-radius: 10px;
             padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
         .block-title {
-            font-size: 24px;
+            font-size: 22px;
             margin-top: 0;
             margin-bottom: 15px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .block-desc {
-            color: #aaa;
-            font-size: 15px;
-            line-height: 1.5;
-            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -278,7 +257,7 @@
                 <span class="t-text">рынок и множество другого</span> 
                 <span class="server-text">ТОЛЬКО НА НАШЕМ СЕРВЕРЕ!</span>
             </h1>
-            <button class="btn-login" id="mainLoginBtn" onclick="toggleModal(true)">LOG IN / REGISTER</button>
+            <button class="btn-login" onclick="openMyModal()">LOG IN / REGISTER</button>
         </div>
 
         <div class="footer-text" id="footerText">Пролистайте вниз, чтобы увидеть фишки проекта</div>
@@ -286,9 +265,17 @@
 
     <!-- ИНТЕРАКТИВНАЯ ПАНЕЛЬ ИЗ 20 КРУЖКОВ -->
     <div class="circles-section">
-        <h2 style="text-align: center; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 40px; color: #00A3FF;">Панель управления фишками</h2>
+        <h2 style="text-align: center; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 50px; color: #00A3FF;">Панель управления фишками</h2>
         <div class="circles-grid">
             <div class="circle-card"><div class="circle-icon">👤</div><div class="circle-title">Мой Профиль</div></div>
             <div class="circle-card"><div class="circle-icon">🛒</div><div class="circle-title">Маркет</div></div>
             <div class="circle-card"><div class="circle-icon">🤖</div><div class="circle-title">ИИ Оценка</div></div>
             <div class="circle-card"><div class="circle-icon">🎯</div><div class="circle-title">ИИ Тренер</div></div>
+            <div class="circle-card"><div class="circle-icon">🗺️</div><div class="circle-title">Карты CS2</div></div>
+            <div class="circle-card"><div class="circle-icon">✈️</div><div class="circle-title">ТГ-Бот</div></div>
+            <div class="circle-card"><div class="circle-icon">📦</div><div class="circle-title">ИИ Скины</div></div>
+            <div class="circle-card"><div class="circle-icon">⚖️</div><div class="circle-title">Трейд-Бот</div></div>
+            <div class="circle-card"><div class="circle-icon">📊</div><div class="circle-title">Трекер Меты</div></div>
+            <div class="circle-card"><div class="circle-icon">🎁</div><div class="circle-title">Кейс-Дейлик</div></div>
+            <div class="circle-card"><div class="circle-icon">🏆</div><div class="circle-title">Турниры</div></div>
+
