@@ -87,10 +87,12 @@
             text-shadow: 0 0 30px rgba(255, 255, 255, 0.9);
             margin-top: 15px;
         }
-        /* Кнопка регистрации */
+        /* Кнопка регистрации (теперь это прямая ссылка-якорь) */
         .btn-login {
+            display: inline-block;
             background: linear-gradient(90deg, #FF6A00 0%, #FF8C00 100%);
             color: white;
+            text-decoration: none;
             border: none;
             padding: 20px 60px;
             font-size: 22px;
@@ -115,7 +117,7 @@
             border-radius: 10px;
         }
 
-        /* МОДАЛЬНОЕ ОКНО */
+        /* БЕЗОТКАЗНОЕ МОДАЛЬНОЕ ОКНО НА CSS */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -127,6 +129,10 @@
             justify-content: center;
             align-items: center;
             z-index: 100;
+        }
+        /* Магия CSS: когда в URL появляется #myModal, окно принудительно открывается */
+        .modal-overlay:target {
+            display: flex !important;
         }
         .modal-card {
             background: #131722;
@@ -169,6 +175,8 @@
             cursor: pointer;
             border: none;
             font-size: 16px;
+            text-decoration: none;
+            text-align: center;
         }
         .btn-steam { background: #171a21; color: white; border: 1px solid #2a475e; }
         .btn-faceit { background: #ff5500; color: white; }
@@ -179,6 +187,7 @@
             font-size: 24px;
             cursor: pointer;
             color: #666;
+            text-decoration: none;
         }
 
         /* СЕТКА ИЗ 20 КРУЖКОВ */
@@ -257,7 +266,8 @@
                 <span class="t-text">рынок и множество другого</span> 
                 <span class="server-text">ТОЛЬКО НА НАШЕМ СЕРВЕРЕ!</span>
             </h1>
-            <button class="btn-login" onclick="openMyModal()">LOG IN / REGISTER</button>
+            <!-- Изменили на ссылку-якорь, которая откроет окно без JS -->
+            <a href="#myModal" class="btn-login">LOG IN / REGISTER</a>
         </div>
 
         <div class="footer-text" id="footerText">Пролистайте вниз, чтобы увидеть фишки проекта</div>
@@ -274,8 +284,4 @@
             <div class="circle-card"><div class="circle-icon">🗺️</div><div class="circle-title">Карты CS2</div></div>
             <div class="circle-card"><div class="circle-icon">✈️</div><div class="circle-title">ТГ-Бот</div></div>
             <div class="circle-card"><div class="circle-icon">📦</div><div class="circle-title">ИИ Скины</div></div>
-            <div class="circle-card"><div class="circle-icon">⚖️</div><div class="circle-title">Трейд-Бот</div></div>
-            <div class="circle-card"><div class="circle-icon">📊</div><div class="circle-title">Трекер Меты</div></div>
-            <div class="circle-card"><div class="circle-icon">🎁</div><div class="circle-title">Кейс-Дейлик</div></div>
-            <div class="circle-card"><div class="circle-icon">🏆</div><div class="circle-title">Турниры</div></div>
 
