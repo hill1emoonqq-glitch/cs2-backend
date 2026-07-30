@@ -2,8 +2,5 @@
   "name": "cs2-backend",
   "version": "1.0.0",
   "description": "CS2 AI Platform",
-  "scripts": {
-    "build": "echo 'Готово'"
-  },
   "dependencies": {}
 }
