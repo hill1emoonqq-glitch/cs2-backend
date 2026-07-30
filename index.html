@@ -13,7 +13,7 @@
             font-family: 'Arial', sans-serif;
             overflow-x: hidden;
         }
-        /* Главный экран приветствия с крутым фоном CS2 */
+        /* Главный экран приветствия с крутым и рабочим фоном CS2 */
         .welcome-slide {
             height: 100vh;
             display: flex;
@@ -23,7 +23,7 @@
             padding: 20px;
             box-sizing: border-box;
             background: linear-gradient(180deg, rgba(11, 14, 20, 0.4) 0%, rgba(11, 14, 20, 0.85) 100%), 
-                        url('https://wallpapersden.com');
+                        url('https://fancensus.com');
             background-size: cover;
             background-position: center;
             position: relative;
@@ -66,9 +66,9 @@
             text-align: center;
             max-width: 1000px;
             z-index: 10;
-            background: rgba(11, 14, 20, 0.55);
+            background: rgba(11, 14, 20, 0.65);
             backdrop-filter: blur(4px);
-            padding: 30px;
+            padding: 35px;
             border-radius: 15px;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
@@ -78,6 +78,7 @@
             text-transform: uppercase;
             line-height: 1.4;
             margin-bottom: 35px;
+            margin-top: 0;
         }
         .ct-text { color: #00A3FF; text-shadow: 0 0 20px rgba(0, 163, 255, 0.6); }
         .t-text { color: #FF6A00; text-shadow: 0 0 20px rgba(255, 106, 0, 0.6); }
@@ -116,7 +117,7 @@
             border-radius: 10px;
         }
 
-        /* МОДАЛЬНОЕ ОКНО РЕГИСТРАЦИИ */
+        /* МОДАЛЬНОЕ ОКНО РЕГИСТРАЦИИ (Исправлено) */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -124,17 +125,10 @@
             width: 100%;
             height: 100%;
             background: rgba(5, 7, 10, 0.9);
-            display: flex;
+            display: none; /* Переключили на стандартный контролируемый тип */
             justify-content: center;
             align-items: center;
             z-index: 100;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
         }
         .modal-card {
             background: #131722;
@@ -146,11 +140,6 @@
             max-width: 450px;
             text-align: center;
             position: relative;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-        }
-        .modal-overlay.active .modal-card {
-            transform: scale(1);
         }
         .modal-title {
             font-size: 26px;
@@ -172,9 +161,7 @@
             outline: none;
             transition: border-color 0.2s;
         }
-        .input-field:focus {
-            border-color: #00A3FF;
-        }
+        .input-field:focus { border-color: #00A3FF; }
         .auth-buttons {
             display: flex;
             flex-direction: column;
@@ -197,7 +184,6 @@
         .btn-steam:hover { background: #2a475e; }
         .btn-faceit { background: #ff5500; color: white; }
         .btn-faceit:hover { background: #e04b00; }
-        
         .close-modal {
             position: absolute;
             top: 15px;
@@ -208,10 +194,10 @@
         }
         .close-modal:hover { color: white; }
 
-        /* СЕТКА ИЗ 20 КРУЖКОВ (ПОЯВЛЯЕТСЯ ПОСЛЕ ТЕСТОВОГО ВХОДА) */
+        /* СЕТКА ИЗ 20 КРУЖКОВ */
         .circles-section {
             max-width: 1200px;
-            margin: 40px auto;
+            margin: 60px auto;
             padding: 0 20px;
         }
         .circles-grid {
@@ -244,7 +230,7 @@
         .circle-icon { font-size: 32px; margin-bottom: 8px; }
         .circle-title { font-size: 14px; font-weight: bold; text-transform: uppercase; }
 
-        /* НИЖНИЕ БЛОКИ: ГАЙДЫ И ИНФОРМАЦИЯ */
+        /* НИЖНИЕ БЛОКИ */
         .bottom-sections {
             max-width: 1200px;
             margin: 60px auto;
@@ -278,7 +264,6 @@
 <body>
 
     <div class="welcome-slide">
-        <!-- Верхняя панель -->
         <div class="header">
             <div class="logo">CA</div> 
             <select class="lang-select" id="langSelect" onchange="changeLanguage()">
@@ -287,7 +272,6 @@
             </select>
         </div>
 
-        <!-- Центральный сочный слоган -->
         <div class="slogan-container">
             <h1 class="slogan" id="sloganText">
                 <span class="ct-text">Твой личный ИИ-тренер</span>, 
@@ -297,11 +281,14 @@
             <button class="btn-login" id="mainLoginBtn" onclick="toggleModal(true)">LOG IN / REGISTER</button>
         </div>
 
-        <div class="footer-text" id="footerText">Пролистайте вниз, чтобы узнать больше о проекте</div>
+        <div class="footer-text" id="footerText">Пролистайте вниз, чтобы увидеть фишки проекта</div>
     </div>
 
     <!-- ИНТЕРАКТИВНАЯ ПАНЕЛЬ ИЗ 20 КРУЖКОВ -->
     <div class="circles-section">
         <h2 style="text-align: center; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 40px; color: #00A3FF;">Панель управления фишками</h2>
         <div class="circles-grid">
-
+            <div class="circle-card"><div class="circle-icon">👤</div><div class="circle-title">Мой Профиль</div></div>
+            <div class="circle-card"><div class="circle-icon">🛒</div><div class="circle-title">Маркет</div></div>
+            <div class="circle-card"><div class="circle-icon">🤖</div><div class="circle-title">ИИ Оценка</div></div>
+            <div class="circle-card"><div class="circle-icon">🎯</div><div class="circle-title">ИИ Тренер</div></div>
