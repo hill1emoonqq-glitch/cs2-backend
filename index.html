@@ -32,6 +32,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            z-index: 10;
         }
         .logo {
             width: 50px;
@@ -44,6 +45,7 @@
             font-weight: bold;
             font-size: 20px;
             box-shadow: 0 0 15px rgba(255, 106, 0, 0.4);
+            user-select: none;
         }
         .lang-select {
             background: #1A1F29;
@@ -52,53 +54,147 @@
             padding: 8px 15px;
             border-radius: 5px;
             cursor: pointer;
+            font-weight: bold;
+            outline: none;
         }
         /* Огромный маркетинговый слоган */
         .slogan-container {
             text-align: center;
-            max-width: 900px;
+            max-width: 1000px;
             z-index: 10;
         }
         .slogan {
             font-size: 42px;
             font-weight: 900;
             text-transform: uppercase;
-            line-height: 1.3;
-            margin-bottom: 30px;
-            text-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+            line-height: 1.4;
+            margin-bottom: 40px;
         }
-        .ct-text { color: #00A3FF; text-shadow: 0 0 15px rgba(0, 163, 255, 0.6); }
-        .t-text { color: #FF6A00; text-shadow: 0 0 15px rgba(255, 106, 0, 0.6); }
+        .ct-text { color: #00A3FF; text-shadow: 0 0 20px rgba(0, 163, 255, 0.5); }
+        .t-text { color: #FF6A00; text-shadow: 0 0 20px rgba(255, 106, 0, 0.5); }
         .server-text {
             display: block;
-            font-size: 52px;
+            font-size: 56px;
             color: #FFFFFF;
-            text-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
-            margin-top: 10px;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+            margin-top: 15px;
         }
         /* Кнопка регистрации */
         .btn-login {
             background: linear-gradient(90deg, #FF6A00 0%, #FF8C00 100%);
             color: white;
             border: none;
-            padding: 18px 45px;
-            font-size: 20px;
+            padding: 20px 60px;
+            font-size: 22px;
             font-weight: bold;
             text-transform: uppercase;
             border-radius: 5px;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(255, 106, 0, 0.5);
+            box-shadow: 0 0 25px rgba(255, 106, 0, 0.5);
             transition: transform 0.2s, box-shadow 0.2s;
         }
         .btn-login:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(255, 106, 0, 0.8);
+            box-shadow: 0 0 40px rgba(255, 106, 0, 0.8);
         }
         .footer-text {
             margin-bottom: 20px;
-            color: #666;
+            color: #555;
             font-size: 14px;
+            z-index: 10;
         }
+
+        /* МОДАЛЬНОЕ ОКНО РЕГИСТРАЦИИ */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 7, 10, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-card {
+            background: #131722;
+            border: 2px solid #1A1F29;
+            box-shadow: 0 0 40px rgba(0, 163, 255, 0.2);
+            border-radius: 10px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-card {
+            transform: scale(1);
+        }
+        .modal-title {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .input-field {
+            width: 100%;
+            background: #1C2130;
+            border: 1px solid #333;
+            padding: 15px;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .input-field:focus {
+            border-color: #00A3FF;
+        }
+        .auth-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .auth-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+            transition: background 0.2s;
+        }
+        .btn-steam { background: #171a21; color: white; border: 1px solid #2a475e; }
+        .btn-steam:hover { background: #2a475e; }
+        .btn-faceit { background: #ff5500; color: white; }
+        .btn-faceit:hover { background: #e04b00; }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+        .close-modal:hover { color: white; }
     </style>
 </head>
 <body>
@@ -106,27 +202,85 @@
     <div class="welcome-slide">
         <!-- Верхняя панель -->
         <div class="header">
-            <div class="logo">CA</div> <!-- Две буквы твоего будущего названия -->
-            <select class="lang-select">
-                <option>Русский</option>
-                <option>English</option>
-                <option>Deutsch</option>
-                <!-- Сюда добавим остальные из 30 языков -->
+            <div class="logo">CA</div> 
+            <select class="lang-select" id="langSelect" onchange="changeLanguage()">
+                <option value="ru">Русский</option>
+                <option value="en">English</option>
             </select>
         </div>
 
         <!-- Центральный сочный слоган -->
         <div class="slogan-container">
-            <h1 class="slogan">
+            <h1 class="slogan" id="sloganText">
                 <span class="ct-text">Твой личный ИИ-тренер</span>, 
                 <span class="t-text">рынок и множество другого</span> 
                 <span class="server-text">ТОЛЬКО НА НАШЕМ СЕРВЕРЕ!</span>
             </h1>
-            <button class="btn-login" onclick="alert('Тут откроется окно: Вход через Steam / Faceit и создание никнейма!')">LOG IN / REGISTER</button>
+            <button class="btn-login" id="mainLoginBtn" onclick="toggleModal(true)">LOG IN / REGISTER</button>
         </div>
 
-        <div class="footer-text">Пролистайте вниз, чтобы узнать больше о проекте</div>
+        <div class="footer-text" id="footerText">Пролистайте вниз, чтобы узнать больше о проекте</div>
     </div>
 
-</body>
-</html>
+    <!-- МОДАЛЬНОЕ ОКНО РЕГИСТРАЦИИ -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-card">
+            <div class="close-modal" onclick="toggleModal(false)">&times;</div>
+            <div class="modal-title" id="modalTitle">Регистрация платформы</div>
+            
+            <!-- Поле ввода уникального никнейма сайта -->
+            <input type="text" class="input-field" id="nickInput" placeholder="Придумай ник на нашей платформе">
+            
+            <!-- Кнопки привязки игровых аккаунтов -->
+            <div class="auth-buttons">
+                <button class="auth-btn btn-steam" onclick="alert('Перенаправление на безопасный Steam OpenID...')">
+                    Войти через Steam
+                </button>
+                <button class="auth-btn btn-faceit" onclick="alert('Подключение к API Faceit...')">
+                    Подключить FACEIT
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Функция открытия/закрытия окна регистрации
+        function toggleModal(show) {
+            const overlay = document.getElementById('modalOverlay');
+            if(show) {
+                overlay.classList.add('active');
+            } else {
+                overlay.classList.remove('active');
+            }
+        }
+
+        // Объекты перевода под языки
+        const translations = {
+            ru: {
+                slogan: `<span class="ct-text">Твой личный ИИ-тренер</span>, <span class="t-text">рынок и множество другого</span> <span class="server-text">ТОЛЬКО НА НАШЕМ СЕРВЕРЕ!</span>`,
+                footer: 'Пролистайте вниз, чтобы узнать больше о проекте',
+                modalTitle: 'Регистрация платформы',
+                placeholder: 'Придумай ник на нашей платформе',
+                steamBtn: 'Войти через Steam',
+                faceitBtn: 'Подключить FACEIT'
+            },
+            en: {
+                slogan: `<span class="ct-text">Your personal AI coach</span>, <span class="t-text">market and much more</span> <span class="server-text">ONLY ON OUR SERVER!</span>`,
+                footer: 'Scroll down to learn more about the project',
+                modalTitle: 'Platform Registration',
+                placeholder: 'Create nickname on our platform',
+                steamBtn: 'Log in via Steam',
+                faceitBtn: 'Connect FACEIT'
+            }
+        };
+
+        // Логика мгновенного переключения языка
+        function changeLanguage() {
+            const lang = document.getElementById('langSelect').value;
+            const t = translations[lang];
+            
+            document.getElementById('sloganText').innerHTML = t.slogan;
+            document.getElementById('footerText').innerText = t.footer;
+            document.getElementById('modalTitle').innerText = t.modalTitle;
+            document.getElementById('nickInput').placeholder = t.placeholder;
+            document.querySelectorAll('.btn-steam')[0].innerText = t.steamBtn;
