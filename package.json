@@ -1,13 +1,9 @@
 {
   "name": "cs2-backend",
   "version": "1.0.0",
-  "description": "Бесплатный бэкенд для CS2 проекта",
-  "main": "server.js",
+  "description": "CS2 AI Platform",
   "scripts": {
-    "start": "node server.js"
+    "build": "echo 'Фронтенд готов!'"
   },
-  "dependencies": {
-    "express": "^4.19.2",
-    "cors": "^2.8.5"
-  }
+  "dependencies": {}
 }
