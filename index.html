@@ -3,162 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CS2 AI Esports Platform</title>
+    <title>CYBERSHOK AI - Next-Gen Esports Platform</title>
     <style>
-        :root { --bg-dark: #0B0E14; --bg-card: #131722; --bg-input: #1C2130; --border-color: #1A1F29; --ct-neon: #00A3FF; --t-neon: #FF6A00; --text-main: #FFFFFF; --text-muted: #aaa; --success: #00FF66; }
-        html, body { margin: 0; padding: 0; width: 100%; background-color: var(--bg-dark); color: var(--text-main); font-family: 'Arial', sans-serif; scroll-behavior: smooth; }
-        .welcome-slide { min-height: 100vh; width: 100%; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 30px 20px; box-sizing: border-box; background: linear-gradient(180deg, rgba(11, 14, 20, 0.4) 0%, rgba(11, 14, 20, 0.95) 100%), url('https://steamstatic.com'); background-size: cover; background-position: center; }
-        .header { width: 100%; max-width: 1200px; display: flex; justify-content: space-between; align-items: center; z-index: 10; }
-        .logo-box { display: flex; align-items: center; gap: 15px; }
-        .logo { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--ct-neon), var(--t-neon)); display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 20px; box-shadow: 0 0 15px rgba(255, 106, 0, 0.4); }
-        .logo-text { font-size: 24px; font-weight: 900; color: #fff; }
-        .lang-select { background: rgba(26, 31, 41, 0.95); color: white; border: 1px solid #333; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; outline: none; }
-        .slogan-container { text-align: center; max-width: 1000px; background: rgba(11, 14, 20, 0.8); backdrop-filter: blur(10px); padding: 50px 40px; border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 15px 35px rgba(0,0,0,0.6); margin: 40px 0; z-index: 10; }
-        .slogan { font-size: 38px; font-weight: 900; text-transform: uppercase; line-height: 1.4; margin: 0 0 35px 0; }
-        .ct-text { color: var(--ct-neon); text-shadow: 0 0 20px rgba(0, 163, 255, 0.6); }
-        .t-text { color: var(--t-neon); text-shadow: 0 0 20px rgba(255, 106, 0, 0.6); }
-        .server-text { display: block; font-size: 54px; color: #FFFFFF; text-shadow: 0 0 35px rgba(255, 255, 255, 0.9); margin-top: 15px; }
-        .btn-login { display: inline-block; background: linear-gradient(90deg, var(--t-neon) 0%, #FF8C00 100%); color: white !important; text-decoration: none !important; padding: 22px 65px; font-size: 22px; font-weight: bold; text-transform: uppercase; border-radius: 5px; border: none; cursor: pointer; box-shadow: 0 0 25px rgba(255, 106, 0, 0.5); transition: transform 0.2s; }
-        .btn-login:hover { transform: scale(1.05); }
-        .footer-hint { color: var(--text-muted); font-size: 14px; background: rgba(11, 14, 20, 0.8); padding: 8px 20px; border-radius: 10px; z-index: 10; }
-        .main-dashboard { max-width: 1200px; margin: 60px auto; padding: 0 20px; }
-        .section-title { text-align: center; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 50px; color: var(--ct-neon); font-size: 28px; }
-        .circles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 30px; justify-items: center; }
-        .circle-card { width: 160px; height: 160px; background: var(--bg-card); border: 2px solid var(--border-color); border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; cursor: pointer; transition: transform 0.2s; padding: 15px; box-sizing: border-box; }
-        .circle-card:hover { transform: translateY(-8px); border-color: var(--t-neon); }
-        .circle-icon { font-size: 38px; margin-bottom: 6px; }
-        .circle-title { font-size: 12px; font-weight: bold; text-transform: uppercase; line-height: 1.2; }
+        :root {
+            --bg-dark: #07090E;
+            --bg-sidebar: #0B0E14;
+            --bg-card: #131722;
+            --bg-input: #1C2130;
+            --border: #1A1F29;
+            --steam-blue: #1A9FFF;
+            --faceit-orange: #FF5500;
+            --text-main: #FFFFFF;
+            --text-muted: #626875;
+            --success: #00FF66;
+            --gold: #FFD700;
+        }
+
+        html, body {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: var(--bg-dark); color: var(--text-main);
+            font-family: 'Arial', '-apple-system', sans-serif; overflow-x: hidden;
+        }
+
+        /* КИБЕРШОК ИНТЕРФЕЙС ВО ВЕСЬ ЭКРАН */
+        .app-wrapper {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            min-height: 100vh;
+            width: 100%;
+        }
+        @media(max-width: 1000px) { .app-wrapper { grid-template-columns: 1fr; } .sidebar { display: none; } }
+
+        /* БОКОВОЕ МЕНЮ (САЙДБАР) */
+        .sidebar {
+            background-color: var(--bg-sidebar);
+            border-right: 1px solid var(--border);
+            padding: 25px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .sidebar-top { display: flex; flex-direction: column; gap: 30px; }
+        .sidebar-logo-box { display: flex; align-items: center; gap: 12px; }
+        .sidebar-logo {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--steam-blue), var(--faceit-orange));
+            display: flex; justify-content: center; align-items: center;
+            font-weight: bold; font-size: 16px; box-shadow: 0 0 10px rgba(255, 106, 0, 0.3);
+        }
+        .sidebar-logo-text { font-size: 20px; font-weight: 900; letter-spacing: 0.5px; }
+        .menu-group { display: flex; flex-direction: column; gap: 6px; }
+        .menu-label { font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; margin-left: 10px; }
+        .menu-item {
+            display: flex; align-items: center; gap: 12px; padding: 12px 15px;
+            border-radius: 6px; color: #ced4da; text-decoration: none;
+            font-weight: bold; font-size: 14px; transition: all 0.2s;
+            cursor: pointer; border: none; background: none; width: 100%; text-align: left;
+        }
+        .menu-item:hover, .menu-item.active { background: var(--bg-card); color: white; }
+        .menu-premium { color: var(--gold) !important; background: rgba(255,215,0,0.03); border: 1px solid rgba(255,215,0,0.1); }
+        .menu-premium:hover { background: rgba(255,215,0,0.08); }
+
+        /* ОСНОВНОЙ КОНТЕНТ */
+        .main-content { display: flex; flex-direction: column; padding: 30px; box-sizing: border-box; width: 100%; }
+
+        /* ВЕРХНЯЯ НАВИГАЦИЯ */
+        .top-navbar {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 35px; background: var(--bg-sidebar); padding: 15px 30px;
+            border-radius: 8px; border: 1px solid var(--border); width: 100%; box-sizing: border-box;
+        }
+        .navbar-actions { display: flex; align-items: center; gap: 15px; }
+        .btn-auth {
+            padding: 12px 24px; border-radius: 4px; font-weight: bold; font-size: 13px;
+            text-transform: uppercase; cursor: pointer; border: none; text-decoration: none; color: white;
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+        .btn-auth:hover { transform: scale(1.02); }
+        .btn-steam { background-color: var(--steam-blue); box-shadow: 0 4px 15px rgba(26,159,255,0.2); }
+        .btn-faceit { background-color: var(--faceit-orange); box-shadow: 0 4px 15px rgba(255,85,0,0.2); }
+        
+        .user-profile-tag {
+            display: none; align-items: center; gap: 12px; background: var(--bg-input);
+            padding: 8px 18px; border-radius: 4px; border: 1px solid var(--border); cursor: pointer;
+        }
+        .lang-select {
+            background: rgba(26, 31, 41, 0.95); color: white; border: 1px solid #333;
+            padding: 11px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; outline: none; font-size: 13px;
+        }
+
+        /* СЕТКА ИГРОВЫХ РЕЖИМОВ КИБЕРШОКА */
+        .modes-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 20px; margin-bottom: 40px; width: 100%;
+        }
+        .mode-tile {
+            background-color: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 8px; height: 150px; display: flex; flex-direction: column;
+            justify-content: flex-end; padding: 20px; box-sizing: border-box;
+            cursor: pointer; position: relative; transition: all 0.2s;
+            background-size: cover; background-position: center;
+        }
+        .mode-tile:hover { transform: translateY(-5px); border-color: var(--faceit-orange); box-shadow: 0 5px 20px rgba(255,85,0,0.15); }
+        .mode-tile::before {
+            content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
+            background: linear-gradient(0deg, rgba(7,9,14,0.95) 0%, rgba(7,9,14,0.1) 100%);
+            border-radius: 7px; z-index: 1;
+        }
+        .mode-name { font-size: 18px; font-weight: 900; text-transform: uppercase; z-index: 2; letter-spacing: 0.5px; }
+        .mode-online { font-size: 12px; color: #8a909d; z-index: 2; margin-top: 5px; display: flex; align-items: center; gap: 6px; }
+        .online-dot { width: 6px; height: 6px; background-color: var(--success); border-radius: 50%; display: inline-block; }
+
+        /* ИИ ОКНА И ИНТЕРФЕЙСЫ ФИШЕК */
+        .ai-window {
+            display: none; background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 10px; padding: 30px; margin-bottom: 35px; width: 100%; box-sizing: border-box;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .window-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border); padding-bottom: 15px; margin-bottom: 25px; }
+        .window-title { margin: 0; font-size: 22px; text-transform: uppercase; font-weight: 900; color: var(--faceit-orange); }
+
+        /* ИИ ЧАТ С НАШЕЙ АВАТАРКОЙ (CA) */
+        .chat-container {
+            height: 260px; background: var(--bg-dark); border-radius: 6px;
+            padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px; border: 1px solid #1A1F29;
+        }
+        .msg-wrapper { display: flex; gap: 12px; align-items: flex-start; max-width: 80%; }
+        .wrapper-user { align-self: flex-end; flex-direction: row-reverse; }
+        .chat-avatar {
+            width: 35px; height: 30px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--ct-neon), var(--t-neon));
+            display: flex; justify-content: center; align-items: center;
+            font-weight: bold; font-size: 12px; color: white; box-shadow: 0 0 8px rgba(0,163,255,0.4); user-select: none; flex-shrink: 0;
+        }
+        .user-avatar-icon { background: var(--faceit-orange); box-shadow: 0 0 8px rgba(255,85,0,0.4); }
+        .msg { padding: 12px 18px; border-radius: 8px; font-size: 14px; line-height: 1.5; word-break: break-word; }
+        .msg-b { background: var(--bg-input); border: 1px solid var(--border); }
+        .msg-u { background: var(--faceit-orange); color: white; }
+
+        /* ОКНО ДЕМОК И МАРКЕТА */
+        .cabinet-box { background: var(--bg-input); border: 1px solid var(--border); border-radius: 8px; padding: 25px; margin-bottom: 20px; }
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin-top: 20px; }
+        .market-item { background: var(--bg-dark); border: 1px solid var(--border); border-radius: 6px; padding: 20px; text-align: center; }
+        .server-row { display: flex; justify-content: space-between; align-items: center; background: var(--bg-dark); padding: 15px 20px; border-radius: 6px; border-left: 4px solid var(--steam-blue); margin-bottom: 12px; cursor: pointer; transition: background 0.2s; }
+        .server-row:hover { background: var(--bg-input); }
+
+        /* МОДАЛКА ВХОДА */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 7, 10, 0.95); display: none; justify-content: center; align-items: center; z-index: 99999; }
-        .modal-card { background: var(--bg-card); border: 2px solid var(--border-color); box-shadow: 0 0 40px rgba(0, 163, 255, 0.3); border-radius: 10px; padding: 40px; width: 100%; max-width: 450px; text-align: center; position: relative; }
-        .modal-card-title { font-size: 24px; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; }
-        .input-field { width: 100%; background: var(--bg-input); border: 1px solid #333; padding: 15px; border-radius: 5px; color: white; font-size: 16px; box-sizing: border-box; margin-bottom: 25px; outline: none; text-align: center; }
-        .auth-buttons { display: flex; flex-direction: column; gap: 15px; }
-        .auth-btn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px; border-radius: 5px; font-weight: bold; font-size: 16px; cursor: pointer; border: none; }
-        .btn-steam { background: #171a21; color: white; }
-        .btn-faceit { background: #ff5500; color: white; }
-        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 32px; color: #666; cursor: pointer; }
-        .feature-panel { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); display: none; z-index: 99999; overflow-y: auto; padding: 40px 20px; box-sizing: border-box; }
-        .panel-container { max-width: 1000px; margin: 0 auto; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 35px; }
-        .panel-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); padding-bottom: 20px; margin-bottom: 25px; }
-        .panel-title { margin: 0; font-size: 26px; text-transform: uppercase; color: var(--t-neon); }
-        .cabinet-box { background: var(--bg-input); border: 1px solid #222; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
-        .box-title { font-size: 18px; font-weight: bold; margin: 0 0 15px 0; text-transform: uppercase; color: var(--ct-neon); }
-        .chat-area { height: 220px; background: #0B0E14; border-radius: 6px; padding: 15px; overflow-y: auto; margin-bottom: 15px; display: flex; flex-direction: column; gap: 10px; }
-        .chat-msg { max-width: 80%; padding: 10px 15px; border-radius: 8px; font-size: 14px; }
-        .msg-bot { background: var(--bg-card); color: white; align-self: flex-start; border-left: 3px solid var(--ct-neon); }
-        .msg-user { background: var(--t-neon); color: white; align-self: flex-end; }
-        .profile-header-card { display: flex; align-items: center; gap: 20px; background: var(--bg-input); padding: 20px; border-radius: 8px; margin-bottom: 25px; }
-        .profile-avatar-circle { width: 70px; height: 70px; border-radius: 50%; background: #2a475e; border: 3px solid var(--t-neon); }
-        .bottom-sections { max-width: 1200px; margin: 80px auto; padding: 0 20px; display: flex; flex-direction: column; gap: 35px; }
-        .info-block { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 30px; }
-        .block-title { font-size: 22px; margin: 0 0 15px 0; text-transform: uppercase; }
+        .modal-card { background: var(--bg-card); border: 2px solid var(--border); box-shadow: 0 0 40px rgba(0, 163, 255, 0.2); border-radius: 10px; padding: 40px; width: 100%; max-width: 420px; text-align: center; position: relative; }
+        .modal-card-title { font-size: 22px; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .input-field { width: 100%; background: var(--bg-input); border: 1px solid #333; padding: 14px; border-radius: 5px; color: white; font-size: 15px; box-sizing: border-box; margin-bottom: 25px; outline: none; text-align: center; }
+        .input-field:focus { border-color: var(--faceit-orange); }
+
+        /* ПОДВАЛ */
+        .bottom-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-top: 20px; width: 100%; }
+        .bottom-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .bottom-card h4 { margin-top: 0; margin-bottom: 12px; text-transform: uppercase; font-size: 16px; color: var(--steam-blue); letter-spacing: 0.5px; }
     </style>
 </head>
-<body>
-    <div class="welcome-slide" id="welcomeSlide">
-        <div class="header">
-            <div class="logo-box"><div class="logo">CA</div><div class="logo-text">CS2.AI</div></div>
-            <select class="lang-select" id="langSelect" onchange="changeLanguage()">
-                <option value="ru">Русский (RU)</option><option value="en">English (EN)</option><option value="de">Deutsch (DE)</option><option value="zh">中文 (ZH)</option><option value="pl">Polski (PL)</option>
-            </select>
-        </div>
-        <div class="slogan-container">
-            <h1 class="slogan" id="sloganText"><span class="ct-text">Твой личный ИИ-тренер</span>, <span class="t-text">рынок и множество другого</span> <span class="server-text">ТОЛЬКО НА НАШЕМ СЕРВЕРЕ!</span></h1>
-            <button class="btn-login" id="mainLoginBtn" onclick="toggleModal(true)">LOG IN / REGISTER</button>
-        </div>
-        <div class="footer-hint" id="footerText">Пролистайте вниз, чтобы увидеть фишки проекта</div>
-    </div>
 
-    <div class="main-dashboard">
-        <h2 class="section-title" id="panelTitle">Панель управления фишками</h2>
-        <div class="circles-grid" id="circlesGrid"></div>
-    </div>
-
-    <div class="bottom-sections">
-        <div class="info-block"><h2 class="block-title" id="guideTitle">📚 Умные Гайды и Раскидки</h2><p style="color: var(--text-muted); margin:0;" id="guideDesc">Наша база знаний обновляется автоматически с помощью ИИ.</p></div>
-        <div class="info-block"><h2 class="block-title" id="metaTitle">📊 Мониторинг Обновлений CS2</h2><p style="color: var(--text-muted); margin:0;" id="metaDesc">ИИ анализирует каждый патч Valve в реальном времени.</p></div>
-        <div class="info-block"><h2 class="block-title" id="authorTitle">✉️ Вопрос к Автору и Поддержка</h2><p style="color: var(--text-muted); margin:0;" id="authorDesc">Есть крутое предложение? Напишите автору напрямую.</p></div>
-    </div>
-
-    <div class="modal-overlay" id="registerModal"><div class="modal-card"><div class="close-modal" onclick="toggleModal(false)">&times;</div><div class="modal-title modal-card-title" id="modalTitle">Регистрация</div><input type="text" class="input-field" id="nickInput" value="Hillemoongg"><div class="auth-buttons"><button class="auth-btn btn-steam" id="steamBtnText" onclick="handleLogin()">Steam</button><button class="auth-btn btn-faceit" id="faceitBtnText" onclick="handleLogin()">FACEIT</button></div></div></div>
-
-    <div class="feature-panel" id="panel_p1"><div class="panel-container"><div class="panel-header"><h2 class="panel-title" id="p1_h">👤 Профиль</h2><div class="close-modal" onclick="closePanel('p1')">&times;</div></div><div class="profile-header-card"><div class="profile-avatar-circle"></div><div><h3 style="margin:0;" id="prof_nick">Hillemoongg</h3><small style="color:var(--success); font-weight:bold;">Global AI Elite (VIP)</small></div></div><div class="cabinet-box"><div class="box-title" id="p1_b1">🤖 ИИ Чат-тренер</div><div class="chat-area" id="chatArea"><div class="chat-msg msg-bot">Привет! Я твой ИИ тренер. Задай вопрос по тактике!</div></div><div style="display:flex; gap:10px;"><input type="text" class="input-field" style="margin:0; padding:10px;" id="chatInput"><button class="btn-login" style="padding:10px 20px; font-size:14px; box-shadow:none;" onclick="sendChatMessage()">></button></div></div><button class="btn-login" style="padding:10px 25px; font-size:14px; box-shadow:none;" onclick="logout()">Сменить аккаунт</button></div></div>
-
-    <div class="feature-panel" id="panel_p2"><div class="panel-container"><div class="panel-header"><h2 class="panel-title" id="p2_h">🛒 Маркет</h2><div class="close-modal" onclick="closePanel('p2')">&times;</div></div><div style="background:var(--bg-input); padding:15px; border-radius:6px; margin-bottom:20px;"><b id="p2_bal">Баланс: $45.00</b></div><div class="cabinet-box" style="text-align:center;"><b>AK-47 | Asimov</b><br><span style="color:var(--t-neon)">$28.50</span></div></div></div>
-    <div class="feature-panel" id="panel_generic"><div class="panel-container"><div class="panel-header"><h2 class="panel-title" id="genericTitle">Фишка</h2><div class="close-modal" onclick="document.getElementById('panel_generic').style.display='none'">&times;</div></div><div class="cabinet-box"><p id="genericDesc">Модуль ИИ успешно интегрирован в ядро платформы.</p></div></div></div>
-</body>
-<script>
-    const circleData = [
-        { icon: "👤", id: "p1" }, { icon: "🛒", id: "p2" }, { icon: "🤖", id: "p3" }, { icon: "🎯", id: "p4" }, { icon: "🗺️", id: "p5" },
-        { icon: "✈️", id: "p6" }, { icon: "📦", id: "p7" }, { icon: "⚖️", id: "p8" }, { icon: "📊", id: "p9" }, { icon: "🎁", id: "p10" },
-        { icon: "🏆", id: "p11" }, { icon: "👥", id: "p12" }, { icon: "🎬", id: "p13" }, { icon: "🎰", id: "p14" }, { icon: "🎤", id: "p15" },
-        { icon: "🔮", id: "p16" }, { icon: "🥇", id: "p17" }, { icon: "🛠️", id: "p18" }, { icon: "💬", id: "p19" }, { icon: "📑", id: "p20" }
-    ];
-    let isLoggedIn = false;
-    const translations = {
-        ru: { slogan: `<span class="ct-text">Твой личный ИИ-тренер</span>, <span class="t-text">рынок и множество другого</span> <span class="server-text">ТОЛЬКО НА НАШЕМ СЕРВЕРЕ!</span>`, loginBtn: "Войти / Регистрация", footer: "Пролистайте вниз, чтобы увидеть фишки проекта", panel: "Панель управления фишками", guideT: "📚 Умные Гайды и Раскидки", guideD: "Наша база знаний обновляется автоматически с помощью ИИ.", metaT: "📊 Мониторинг Обновлений CS2", metaD: "ИИ анализирует каждый патч Valve в реальном времени.", authorT: "✉️ Вопрос к Автору и Поддержка", authorD: "Есть крутое предложение? Напишите автору напрямую.", modalT: "Регистрация платформы", holder: "Придумай ник", steam: "Войти через Steam", faceit: "Подключить FACEIT", p1_h: "👤 Мой Профиль", p1_b1: "🤖 ИИ Чат-тренер", p2_h: "🛒 Маркет Скинов", p2_bal: "Баланс: $45.00", circles: ["Мой Профиль", "Маркет", "ИИ Оценка", "ИИ Тренер", "Карты CS2", "ТГ-Бот", "ИИ Скины", "Трейд-Бот", "Трекер Меты", "Кейс-Дейлик", "Турниры", "Поиск Пати", "ИИ Клипы", "Контракты", "Озвучка ИИ", "Предикты", "Квесты", "Кастомизация", "Живой Чат", "База Знаний"] },
-        en: { slogan: `<span class="ct-text">Your personal AI coach</span>, <span class="t-text">market and much more</span> <span class="server-text">ONLY ON OUR SERVER!</span>`, loginBtn: "Log In / Register", footer: "Scroll down to see project features", panel: "Feature Management Panel", guideT: "📚 Smart Guides & Smokes", guideD: "Our knowledge base updates automatically using AI.", metaT: "📊 CS2 Patch Monitoring", metaD: "AI analyzes every single Valve patch in real-time.", authorT: "✉️ Contact Author & Support", authorD: "Have a suggestion? Write directly to the author.", modalT: "Platform Registration", holder: "Create nickname", steam: "Log in via Steam", faceit: "Connect FACEIT", p1_h: "👤 My Profile", p1_b1: "🤖 AI Chat-Coach", p2_h: "🛒 Skin Market", p2_bal: "Balance: $45.00", circles: ["My Profile", "Market", "AI Evaluation", "AI Coach", "CS2 Maps", "TG-Bot", "AI Skins", "Trade-Bot", "Meta Tracker", "Daily Case", "Tournaments", "LFG Party", "AI Clips", "Contracts", "AI Voice", "Match Predicts", "Quests", "Customization", "Live Chat", "Knowledge Base"] }
-    };
-    const codes = ["de","zh","pl","fr","es","it","tr","uk","pt","nl","sv","fi","no","da","cs","hu","ro","bg","el","ar","he","hi","ja","ko","th","vi","id","ms"];
-    codes.forEach(c => { if(!translations[c]) { translations[c] = JSON.parse(JSON.stringify(translations["en"])); translations[c].loginBtn += ` (${c.toUpperCase()})`; } });
-
-    function changeLanguage() {
-        const lang = document.getElementById('langSelect').value;
-        const t = translations[lang] || translations["ru"];
-        document.getElementById('sloganText').innerHTML = t.slogan;
-        document.getElementById('mainLoginBtn').innerText = t.loginBtn;
-        document.getElementById('footerText').innerText = t.footer;
-        document.getElementById('panelTitle').innerText = t.panel;
-        document.getElementById('guideTitle').innerText = t.guideT;
-        document.getElementById('guideDesc').innerText = t.guideD;
-        document.getElementById('metaTitle').innerText = t.metaT;
-        document.getElementById('metaDesc').innerText = t.metaD;
-        document.getElementById('authorTitle').innerText = t.authorT;
-        document.getElementById('authorDesc').innerText = t.authorD;
-        document.getElementById('modalTitle').innerText = t.modalT;
-        document.getElementById('nickInput').placeholder = t.holder;
-        document.getElementById('steamBtnText').innerText = t.steam;
-        document.getElementById('faceitBtnText').innerText = t.faceit;
-        document.getElementById('p1_h').innerText = t.p1_h;
-        document.getElementById('p1_b1').innerText = t.p1_b1;
-        document.getElementById('p2_h').innerText = t.p2_h;
-        document.getElementById('p2_bal').innerText = t.p2_bal;
-        renderCirclesGrid(t.circles);
-    }
-    function renderCirclesGrid(titlesArray) {
-        const grid = document.getElementById('circlesGrid'); grid.innerHTML = '';
-        circleData.forEach((item, index) => {
-            const title = titlesArray[index] || "Service";
-            const card = document.createElement('div'); card.className = 'circle-card';
-            card.onclick = () => handleCircleClick(item.id, title);
-            card.innerHTML = `<div class="circle-icon">${item.icon}</div><div class="circle-title">${title}</div>`;
-            grid.appendChild(card);
-        });
-    }
-    function handleCircleClick(id, title) {
-        if(!isLoggedIn) { toggleModal(true); } 
-        else {
-            const panel = document.getElementById('panel_' + id);
-            if(panel) { panel.style.display = 'flex'; } 
-            else { document.getElementById('genericTitle').innerText = title; document.getElementById('panel_generic').style.display = 'flex'; }
-        }
-    }
-    function toggleModal(show) { document.getElementById('registerModal').style.display = show ? 'flex' : 'none'; }
-    function closePanel(id) { document.getElementById('panel_' + id).style.display = 'none'; }
-    function handleLogin() {
-        const nick = document.getElementById('nickInput').value || "Hillemoongg";
-        document.getElementById('prof_nick').innerText = nick;
-        isLoggedIn = true; toggleModal(false);
-        document.getElementById('welcomeSlide').style.display = 'none';
-        document.getElementById('panel_p1').style.display = 'flex';
-        changeLanguage();
-    }
-    function logout() { isLoggedIn = false; closePanel('p1'); document.getElementById('welcomeSlide').style.display = 'flex'; changeLanguage(); }
-    function sendChatMessage() {
-        const inp = document.getElementById('chatInput'); const txt = inp.value.trim(); if(!txt) return;
-        const area = document.getElementById('chatArea'); const uMsg = document.createElement('div'); uMsg.className = 'chat-msg msg-user'; uMsg.innerText = txt; area.appendChild(uMsg); inp.value = '';
-        setTimeout(() => { const bMsg = document.createElement('div'); bMsg.className = 'chat-msg msg-bot'; bMsg.innerText = "ИИ тренер: твой контроль спрея улучшился на 15%."; area.appendChild(bMsg); area.scrollTop = area.scrollHeight; }, 600);
-    }
-    changeLanguage();
-</script>
-</html>
