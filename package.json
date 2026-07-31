@@ -1,8 +1,7 @@
 {
-  "name": "cyberx-ai-backend",
+  "name": "cyberx-ai-platform",
   "version": "1.0.0",
-  "description": "CyberX Esports Platform AI Backend",
-  "main": "api/server.js",
+  "description": "CyberX AI Esports Platform",
   "dependencies": {
     "express": "^4.19.2",
     "cors": "^2.8.5"
