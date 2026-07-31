@@ -1,12 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CS2 AI Platform & Skin Market</title>
+    <title>CS2 AI Esports Platform & Skin Market</title>
     <style>
-        /* КИБЕРСПОРТИВНЫЙ ИНТЕРФЕЙС И ЦВЕТОВАЯ СХЕМА */
+        /* НЕОНОВЫЙ КИБЕРСПОРТИВНЫЙ ДИЗАЙН И ПЕРЕМЕННЫЕ */
         :root {
             --bg-dark: #0B0E14;
             --bg-card: #131722;
@@ -16,6 +15,7 @@
             --t-neon: #FF6A00;
             --text-main: #FFFFFF;
             --text-muted: #aaa;
+            --success: #00FF66;
         }
 
         html, body {
@@ -28,7 +28,7 @@
             scroll-behavior: smooth;
         }
 
-        /* 1. ГЛАВНЫЙ СЛАЙД ДО АВТОРИЗАЦИИ */
+        /* 1. ГЛАВНЫЙ СЛАЙД ДО ВХОДА (СПЕЦНАЗ И ТЕРРОРИСТЫ В ДЫМУ) */
         .welcome-slide {
             min-height: 100vh;
             width: 100%;
@@ -38,14 +38,14 @@
             align-items: center;
             padding: 30px 20px;
             box-sizing: border-box;
-            background: linear-gradient(180deg, rgba(11, 14, 20, 0.4) 0%, rgba(11, 14, 20, 0.95) 100%), 
+            background: linear-gradient(180deg, rgba(11, 14, 20, 0.3) 0%, rgba(11, 14, 20, 0.95) 100%), 
                         url('https://steamstatic.com');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
         }
 
-        /* НАВИГАЦИОННАЯ ШАПКА */
+        /* ШАПКА САЙТА */
         .header {
             width: 100%;
             max-width: 1200px;
@@ -73,7 +73,7 @@
             user-select: none;
         }
         .logo-text {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 900;
             letter-spacing: 1px;
             background: linear-gradient(90deg, #fff, #888);
@@ -81,15 +81,18 @@
             -webkit-text-fill-color: transparent;
         }
         .lang-select {
-            background: rgba(26, 31, 41, 0.9);
+            background: rgba(26, 31, 41, 0.95);
             color: white;
             border: 1px solid #333;
-            padding: 8px 15px;
+            padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
             outline: none;
+            font-size: 14px;
+            transition: border-color 0.2s;
         }
+        .lang-select:focus { border-color: var(--t-neon); }
 
         /* МАРКЕТИНГОВЫЙ СЛОГАН */
         .slogan-container {
@@ -97,7 +100,7 @@
             max-width: 1000px;
             background: rgba(11, 14, 20, 0.8);
             backdrop-filter: blur(10px);
-            padding: 45px;
+            padding: 50px 40px;
             border-radius: 15px;
             border: 1px solid rgba(255, 255, 255, 0.05);
             box-shadow: 0 15px 35px rgba(0,0,0,0.6);
@@ -117,19 +120,19 @@
         .t-text { color: var(--t-neon); text-shadow: 0 0 20px rgba(255, 106, 0, 0.6); }
         .server-text {
             display: block;
-            font-size: 52px;
+            font-size: 54px;
             color: #FFFFFF;
-            text-shadow: 0 0 30px rgba(255, 255, 255, 0.9);
+            text-shadow: 0 0 35px rgba(255, 255, 255, 0.9);
             margin-top: 15px;
         }
 
-        /* АГРЕССИВНАЯ КНОПКА ВХОДА */
+        /* АГРЕССИВНАЯ ОРАНЖЕВАЯ КНОПКА */
         .btn-login {
             display: inline-block;
             background: linear-gradient(90deg, var(--t-neon) 0%, #FF8C00 100%);
             color: white !important;
             text-decoration: none !important;
-            padding: 20px 60px;
+            padding: 22px 65px;
             font-size: 22px;
             font-weight: bold;
             text-transform: uppercase;
@@ -141,7 +144,7 @@
         }
         .btn-login:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(255, 106, 0, 0.8);
+            box-shadow: 0 0 45px rgba(255, 106, 0, 0.8);
         }
         .footer-hint {
             color: var(--text-muted);
@@ -195,10 +198,10 @@
             border-color: var(--t-neon);
             box-shadow: 0 0 25px rgba(255, 106, 0, 0.4);
         }
-        .circle-icon { font-size: 38px; margin-bottom: 8px; }
-        .circle-title { font-size: 13px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.2; }
+        .circle-icon { font-size: 38px; margin-bottom: 6px; }
+        .circle-title { font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.2; }
 
-        /* 3. ЖЕЛЕЗОБЕТОННОЕ МОДАЛЬНОЕ ОКНО (РЕГИСТРАЦИЯ) */
+        /* 3. ВСЕУДАЛЯЮЩЕЕ ОКНО РЕГИСТРАЦИИ (ЗАКРЫВАЕТ БЛОКИРОВКИ) */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -227,7 +230,6 @@
             font-weight: bold;
             margin-bottom: 25px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
         .input-field {
             width: 100%;
@@ -259,12 +261,9 @@
             font-size: 16px;
             cursor: pointer;
             border: none;
-            transition: background 0.2s;
         }
         .btn-steam { background: #171a21; color: white; border: 1px solid #2a475e; }
-        .btn-steam:hover { background: #2a475e; }
         .btn-faceit { background: #ff5500; color: white; }
-        .btn-faceit:hover { background: #e04b00; }
         .close-modal {
             position: absolute;
             top: 15px;
@@ -272,411 +271,40 @@
             font-size: 32px;
             color: #666;
             cursor: pointer;
-            user-select: none;
         }
-        .close-modal:hover { color: white; }
 
-        /* 4. ВНУТРЕННИЙ ЛИЧНЫЙ КАБИНЕТ (КРУЖОК ПРОФИЛЯ) */
-        .profile-modal {
+        /* 4. МОДУЛЬНЫЕ ОКНА ФИШЕК (ДЕТАЛЬНАЯ НАЧИНКА ДЛЯ КАЖДОГО СЕРВИСА) */
+        .feature-panel {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #0B0E14;
+            background: var(--bg-dark);
             display: none;
             z-index: 99999;
             overflow-y: auto;
-            padding: 30px 20px;
+            padding: 40px 20px;
             box-sizing: border-box;
         }
-        .profile-container {
-            max-width: 1100px;
+        .panel-container {
+            max-width: 1000px;
             margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
         }
-        .profile-header-panel {
+        .panel-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--bg-card);
-            padding: 25px;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
         }
-        .user-info-box {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        .user-avatar-wrapper {
-
-position: relative;
-width: 80px;
-height: 80px;
-}
-.user-avatar {
-width: 100%;
-height: 100%;
-border-radius: 50%;
-background: #2a475e;
-border: 3px solid var(--t-neon);
-box-shadow: 0 0 15px rgba(255,106,0,0.5);
-}
-.vip-badge {
-position: absolute;
-bottom: -5px;
-right: -5px;
-background: linear-gradient(90deg, #FFD700, #FFA500);
-color: black;
-font-size: 10px;
-font-weight: bold;
-padding: 2px 6px;
-border-radius: 10px;
-text-transform: uppercase;
-}
-.profile-grid-layouts {
-display: grid;
-grid-template-columns: 2fr 1fr;
-gap: 30px;
-}
-@media(max-width: 900px) {
-.profile-grid-layouts { grid-template-columns: 1fr; }
-}
-.cabinet-box {
-background: var(--bg-card);
-border: 1px solid var(--border-color);
-border-radius: 10px;
-padding: 25px;
-}
-.box-title {
-font-size: 20px;
-font-weight: bold;
-margin-top: 0;
-margin-bottom: 20px;
-text-transform: uppercase;
-border-bottom: 2px solid var(--border-color);
-padding-bottom: 10px;
-}
-/* ИИ ЧАТ БОТ ИНТЕРФЕЙС */
-.chat-area {
-height: 250px;
-background: var(--bg-dark);
-border-radius: 8px;
-padding: 15px;
-overflow-y: auto;
-margin-bottom: 15px;
-border: 1px solid #222;
-}
-.chat-msg {
-margin-bottom: 12px;
-max-width: 85%;
-padding: 10px 15px;
-border-radius: 8px;
-font-size: 14px;
-line-height: 1.4;
-}
-.msg-bot { background: var(--bg-input); color: white; align-self: flex-start; }
-.msg-user { background: var(--t-neon); color: white; margin-left: auto; text-align: right; }
-/* 5. НИЖНИЕ МАРКЕТИНГОВЫЕ БЛОКИ */
-.bottom-sections {
-max-width: 1200px;
-margin: 80px auto;
-padding: 0 20px;
-display: flex;
-flex-direction: column;
-gap: 35px;
-}
-.info-block {
-background: var(--bg-card);
-border: 1px solid var(--border-color);
-border-radius: 10px;
-padding: 30px;
-box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-.block-title {
-font-size: 22px;
-margin-top: 0;
-margin-bottom: 15px;
-text-transform: uppercase;
-letter-spacing: 0.5px;
-}
-
-
-CA
-CS2.AI
-Русский (RU)
-English (EN)
-Deutsch (DE)
-中文 (ZH)
-Polski (PL)
-Français (FR)
-Español (ES)
-Italiano (IT)
-Türkçe (TR)
-Українська (UK)
-Português (PT)
-Nederlands (NL)
-Svenska (SV)
-Suomi (FI)
-Norsk (NO)
-Dansk (DA)
-Čeština (CS)
-Magyar (HU)
-Română (RO)
-Български (BG)
-Ελληνικά (EL)
-العربية (AR)
-עברית (HE)
-हिन्दी (HI)
-日本語 (JA)
-한국어 (KO)
-ไทย (TH)
-Tiếng Việt (VI)
-Bahasa Indonesia (ID)
-Bahasa Melayu (MS)
-
-Твой личный ИИ-тренер,
-рынок и множество другого
-ТОЛЬКО НА НАШЕМ СЕРВЕРЕ!
-
-LOG IN / REGISTER
-Пролистайте вниз, чтобы увидеть фишки проекта
-Панель управления фишками
-📚 Умные Гайды и Раскидки
-Наша база знаний обновляется автоматически с помощью ИИ. Выберите карту под сеткой кружков.
-
-
-📊 Мониторинг Обновлений CS2
-ИИ анализирует каждый патч Valve в реальном времени и сразу же перестраивает тактики тренировок.
-
-
-✉️ Вопрос к Автору и Поддержка
-Есть крутое предложение по улучшению кружков или нашли баг? Напишите автору напрямую.
-
-×
-Регистрация платформы
-
-
-Войти через Steam
-Подключить FACEIT
-
-
-VIP PREMIUM
-
-
-Hillemoongg
-Ранг Платформы: Global AI Elite
-
-
-Сменить аккаунт
-📊 Моя ИИ-Аналитика скилла
-Твой текущий уровень стрельбы равен 87%. Точность хедшотов выросла за неделю на 4.2%.
-
-
-💾 Хранилище просмотренных демок
-Последний матч загружен: 2 часа назад (Mirage - 13:9 Победа). ИИ-отчёт готов к чтению.
-
-
-💡 Персональные советы тренера
-1. Перестань зажимать на бегу с AK-47.
-2. Обрати внимание на тайминг смока в окно.
-
-🤖 Личный ИИ Чат-бот
-
-Привет, Hillemoongg! Я твой ИИ тренер. Задай мне любой вопрос по твоей демке или тактике!
-
-
-
->
-
-
-
-
-
-// МАССИВ ИЗ 20 КРУЖКОВ СО СТИЛЬНЫМИ ИКОНКАМИ
-const circleData = [
-{ icon: "👤", id: "p1" }, { icon: "🛒", id: "p2" }, { icon: "🤖", id: "p3" }, { icon: "🎯", id: "p4" },
-{ icon: "🗺️", id: "p5" }, { icon: "✈️", id: "p6" }, { icon: "📦", id: "p7" }, { icon: "⚖️", id: "p8" },
-{ icon: "📊", id: "p9" }, { icon: "🎁", id: "p10" }, { icon: "🏆", id: "p11" }, { icon: "👥", id: "p12" },
-{ icon: "🎬", id: "p13" }, { icon: "🎰", id: "p14" }, { icon: "🎤", id: "p15" }, { icon: "🔮", id: "p16" },
-{ icon: "🥇", id: "p17" }, { icon: "🛠️", id: "p18" }, { icon: "💬", id: "p19" }, { icon: "📑", id: "p20" }
-];
-// БАЗА ДАННЫХ ЛОКАЛИЗАЦИИ НА ВСЕ 30 ЯЗЫКОВ
-const translations = {
-ru: {
-slogan: <span class="ct-text">Твой личный ИИ-тренер</span>, <span class="t-text">рынок и множество другого</span> <span class="server-text">ТОЛЬКО НА НАШЕМ СЕРВЕРЕ!</span>,
-loginBtn: "Войти / Регистрация", footer: "Пролистайте вниз, чтобы увидеть фишки проекта", panel: "Панель управления фишками",
-guideT: "📚 Умные Гайды и Раскидки", guideD: "Наша база знаний обновляется автоматически с помощью ИИ. Выберите карту под сеткой кружков.",
-metaT: "📊 Мониторинг Обновлений CS2", metaD: "ИИ анализирует каждый патч Valve в реальном времени и сразу же перестраивает тактики тренировок.",
-authorT: "✉️ Вопрос к Автору и Поддержка", authorD: "Есть крутое предложение по улучшению кружков или нашли баг? Напишите автору напрямую.",
-modalT: "Регистрация платформы", holder: "Придумай ник на нашей платформе", steam: "Войти через Steam", faceit: "Подключить FACEIT",
-box1T: "📊 Моя ИИ-Аналитика скилла", box1D: "Твой текущий уровень стрельбы равен 87%. Точность хедшотов выросла за неделю на 4.2%.",
-box2T: "💾 Хранилище просмотренных демок", box2D: "Последний матч загружен: 2 часа назад (Mirage - 13:9 Победа). ИИ-отчёт готов к чтению.",
-box3T: "💡 Персональные советы тренера", box3D: "1. Перестань зажимать на бегу с AK-47.\n2. Обрати внимание на тайминг смока в окно.",
-chatT: "🤖 Личный ИИ Чат-бот", status: "Ранг Платформы: Global AI Elite", logout: "Сменить аккаунт",
-circles: ["Мой Профиль", "Маркет", "ИИ Оценка", "ИИ Тренер", "Карты CS2", "ТГ-Бот", "ИИ Скины", "Трейд-Бот", "Трекер Меты", "Кейс-Дейлик", "Турниры", "Поиск Пати", "ИИ Клипы", "Контракты", "Озвучка ИИ", "Предикты", "Квесты", "Кастомизация", "Живой Чат", "База Знаний"]
-},
-en: {
-slogan: <span class="ct-text">Your personal AI coach</span>, <span class="t-text">market and much more</span> <span class="server-text">ONLY ON OUR SERVER!</span>,
-loginBtn: "Log In / Register", footer: "Scroll down to see project features", panel: "Feature Management Panel",
-guideT: "📚 Smart Guides & Smokes", guideD: "Our knowledge base updates automatically using AI. Choose a map under the circles grid.",
-metaT: "📊 CS2 Patch Monitoring", metaD: "AI analyzes every single Valve patch in real-time and recreates practice tactics.",
-authorT: "✉️ Contact Author & Support", authorD: "Have a suggestion or found a bug? Write directly to the author via tickets.",
-modalT: "Platform Registration", holder: "Create nickname on our platform", steam: "Log in via Steam", faceit: "Connect FACEIT",
-box1T: "📊 My AI Skill Analytics", box1D: "Your current shooting accuracy is 87%. Headshot precision increased by 4.2% this week.",
-box2T: "💾 Saved Demos Storage", box2D: "Last match loaded: 2 hours ago (Mirage - 13:9 Victory). AI report is ready to read.",
-box3T: "💡 Coach Personal Tips", box3D: "1. Stop spraying while running with AK-47.\n2. Pay attention to the window smoke timing.",
-chatT: "🤖 Personal AI Chat-bot", status: "Platform Rank: Global AI Elite", logout: "Switch Account",
-circles: ["My Profile", "Market", "AI Evaluation", "AI Coach", "CS2 Maps", "TG-Bot", "AI Skins", "Trade-Bot", "Meta Tracker", "Daily Case", "Tournaments", "LFG Party", "AI Clips", "Contracts", "AI Voice", "Match Predicts", "Quests", "Customization", "Live Chat", "Knowledge Base"]
-},
-de: {
-slogan: <span class="ct-text">Ihr persönlicher KI-Trainer</span>, <span class="t-text">Marktplatz und vieles mehr</span> <span class="server-text">NUR AUF UNSEREM SERVER!</span>,
-loginBtn: "Einloggen / Registrieren", footer: "Scrollen Sie nach unten, um Funktionen zu sehen", panel: "Funktions-Management-Panel",
-guideT: "📚 Intelligente Anleitungen", guideD: "Unsere Wissensdatenbank wird automatisch per KI aktualisiert.",
-metaT: "📊 CS2 Patch-Überwachung", metaD: "KI analysiert jeden Valve-Patch in Echtzeit.",
-authorT: "✉️ Kontaktieren Sie den Autor", authorD: "Haben Sie einen Fehler gefunden? Schreiben Sie uns direkt.",
-modalT: "Plattform-Registrierung", holder: "Spitznamen erstellen", steam: "Mit Steam anmelden", faceit: "FACEIT verbinden",
-box1T: "📊 Meine KI-Schnittstellenanalyse", box1D: "Deine Treffgenauigkeit liegt bei 87%.",
-box2T: "💾 Gespeicherte Demos", box2D: "Letztes Match vor 2 Stunden geladen.",
-box3T: "💡 Trainer-Tipps", box3D: "1. Nicht im Laufen schießen.",
-chatT: "🤖 Persönlicher KI-Bot", status: "Plattform-Rang: Global AI Elite", logout: "Konto wechseln",
-circles: ["Mein Profil", "Marktplatz", "KI-Bewertung", "KI-Trainer", "CS2-Karten", "TG-Bot", "KI-Skins", "Trade-Bot", "Meta-Tracker", "Tägliche Kiste", "Turniere", "LFG-Suche", "KI-Clips", "Verträge", "KI-Stimme", "Vorhersagen", "Quests", "Anpassung", "Live-Chat", "Wissensdatenbank"]
-},
-zh: {
-slogan: <span class="ct-text">您的个人人工智能教练</span>，<span class="t-text">皮肤市场等众多功能</span> <span class="server-text">尽在我们的服务器！</span>,
-loginBtn: "登录 / 注册", footer: "向下滚动查看更多功能", panel: "功能管理控制台",
-guideT: "📚 智能教学与道具投掷", guideD: "AI 自动更新的权威战术知识库。",
-metaT: "📊 CS2 更新版本监控", metaD: "AI 实时分析 Valve 的每一次更新补丁。",
-authorT: "✉️ 联系作者与反馈", authorD: "有改进意见或发现漏洞？请直接反馈给作者。",
-modalT: "平台账号注册", holder: "请创造一个游戏昵称", steam: "通过 Steam 登录", faceit: "绑定 FACEIT 账号",
-box1T: "📊 AI 个人数据分析", box1D: "您当前的定位瞄准率为 87%。本周爆头率提升了 4.2%。",
-box2T: "💾 游戏比赛 Demo 档案库", box2D: "最近一场比赛于 2 小时前导入 (Mirage - 13:9 获胜)。",
-box3T: "💡 教练核心改进建议", box3D: "1. 使用 AK-47 时切勿移动中扫射。\n2. 注意 VIP 烟雾弹的起跳时机。",
-chatT: "🤖 专属 AI 战术助手", status: "平台段位: Global AI Elite", logout: "切换账号",
-circles: ["个人主页", "市场交易", "AI评级", "AI教练", "训练服务器", "TG机器人", "AI武器涂装", "自动交易", "版本风向标", "每日免费开箱", "赛事中心", "组队开黑", "AI精彩集锦", "武器汰换", "AI语音包", "胜率预测", "每日任务", "个性化主页", "综合聊天室", "战术基地"]
-},
-pl: {
-slogan: <span class="ct-text">Twój osobisty trener AI</span>, <span class="t-text">rynek skinów i wiele więcej</span> <span class="server-text">TYLKO NA NASZYM SERWERZE!</span>,
-loginBtn: "Zaloguj się / Rejestracja", footer: "Przewiń w dół, aby zobaczyć funkcje", panel: "Panel Zarządzania Funkcjami",
-guideT: "📚 Inteligentne Poradniki", guideD: "Nasza baza wiedzy jest automatycznie aktualizowana przez AI.",
-metaT: "📊 Monitorowanie Aktualizacji CS2", metaD: "AI analizuje każdy patch Valve w czasie rzeczywistym.",
-authorT: "✉️ Napisz do Autora", authorD: "Masz pomysł lub błąd? Napisz bezpośrednio do autora.",
-modalT: "Rejestracja na Platformie", holder: "Stwórz swój pseudonim", steam: "Zaloguj przez Steam", faceit: "Połącz FACEIT",
-box1T: "📊 Moja Analityka KI", box1D: "Twoja celność wynosi obecnie 87%.",
-box2T: "💾 Magazyn Powtórek Demo", box2D: "Ostatni mecz załadowano 2 godziny temu.",
-box3T: "💡 Porady Trenera", box3D: "1. Nie strzelaj serią podczas biegu.",
-chatT: "🤖 Osobisty Bot AI", status: "Ranga Platformy: Global AI Elite", logout: "Zmień konto",
-circles: ["Mój Profil", "Rynek", "Ocena AI", "Trener AI", "Mapy CS2", "TG-Bot", "Skiny AI", "Trade-Bot", "Tracker Mety", "Darmowa Skrzynka", "Turnieje", "Szukaj Ekipy", "Klipy AI", "Kontrakty", "Głos AI", "Predykcje", "Zadania", "Personalizacja", "Czat Na Żywo", "Baza Wiedzy"]
-}
-};
-// Заполняем остальные 25 языков шаблонами по умолчанию на английском
-const extraLangs = ["fr","es","it","tr","uk","pt","nl","sv","fi","no","da","cs","hu","ro","bg","el","ar","he","hi","ja","ko","th","vi","id","ms"];
-extraLangs.forEach(l => { if(!translations[l]) { translations[l] = translations["en"]; } });
-// ФУНКЦИЯ МГНОВЕННОГО ПЕРЕКЛЮЧЕНИЯ ЯЗЫКА
-function changeLanguage() {
-const lang = document.getElementById('langSelect').value;
-const t = translations[lang] || translations["ru"];
-// Перевод главного экрана
-document.getElementById('sloganText').innerHTML = t.slogan;
-document.getElementById('mainLoginBtn').innerText = t.loginBtn;
-document.getElementById('footerText').innerText = t.footer;
-document.getElementById('panelTitle').innerText = t.panel;
-// Перевод нижних блоков
-document.getElementById('guideTitle').innerText = t.guideT;
-document.getElementById('guideDesc').innerText = t.guideD;
-document.getElementById('metaTitle').innerText = t.metaT;
-document.getElementById('metaDesc').innerText = t.metaD;
-document.getElementById('authorTitle').innerText = t.authorT;
-document.getElementById('authorDesc').innerText = t.authorD;
-// Перевод окна регистрации
-document.getElementById('modalTitle').innerText = t.modalT;
-document.getElementById('nickInput').placeholder = t.holder;
-document.getElementById('steamBtnText').innerText = t.steam;
-document.getElementById('faceitBtnText').innerText = t.faceit;
-// Перевод личного кабинета
-document.getElementById('box1Title').innerText = t.box1T;
-document.getElementById('box1Desc').innerText = t.box1D;
-document.getElementById('box2Title').innerText = t.box2T;
-document.getElementById('box2Desc').innerText = t.box2D;
-document.getElementById('box3Title').innerText = t.box3T;
-document.getElementById('box3Desc').innerText = t.box3D;
-document.getElementById('chatTitle').innerText = t.chatT;
-document.getElementById('statusText').innerText = t.status;
-document.getElementById('logoutBtn').innerText = t.logout;
-// Перегенерация 20 кружков с новым языком
-renderCircles(t.circles);
-}
-// РЕНДЕР СЕТКИ КРУЖКОВ
-function renderCircles(circlesTitles) {
-const grid = document.getElementById('circlesGrid');
-grid.innerHTML = '';
-circleData.forEach((item, index) => {
-const title = circlesTitles[index] || "Feature";
-const card = document.createElement('div');
-card.className = 'circle-card';
-card.onclick = () => toggleModal(true); // Любой кружок до входа ведет на авторизацию
-card.innerHTML = <div class="circle-icon">${item.icon}</div><div class="circle-title">${title}</div>;
-grid.appendChild(card);
-});
-}
-// ОТКРЫТИЕ И ЗАКРЫТИЕ МОДАЛКИ ВХОДА
-function toggleModal(show) {
-document.getElementById('registerModal').style.display = show ? 'flex' : 'none';
-}
-// ТЕСТОВЫЙ ВХОД (ПЕРЕКЛЮЧЕНИЕ НА ЛИЧНЫЙ КАБИНЕТ)
-function testLogin() {
-const typedNick = document.getElementById('nickInput').value || "Hillemoongg";
-document.getElementById('userNickName').innerText = typedNick;
-toggleModal(false);
-// Прячем приветствие, выводим личный кабинет на весь экран
-document.getElementById('welcomeSlide').style.display = 'none';
-document.getElementById('profileModal').style.display = 'block';
-// Перестраиваем сетку кружков, чтобы первый кружок (Профиль) возвращал в кабинет
-const lang = document.getElementById('langSelect').value;
-const t = translations[lang] || translations["ru"];
-const grid = document.getElementById('circlesGrid');
-grid.innerHTML = '';
-circleData.forEach((item, index) => {
-const card = document.createElement('div');
-card.className = 'circle-card';
-if(index === 0) {
-card.onclick = () => { document.getElementById('profileModal').style.display = 'block'; };
-} else {
-card.onclick = () => alert('Вы кликнули на фичу: ' + t.circles[index] + '. Модуль ИИ находится в стадии альфа-тестирования.');
-}
-card.innerHTML = <div class="circle-icon">${item.icon}</div><div class="circle-title">${t.circles[index]}</div>;
-grid.appendChild(card);
-});
-}
-// ВЫХОД ИЗ ПРОФИЛЯ
-function logout() {
-document.getElementById('profileModal').style.display = 'none';
-document.getElementById('welcomeSlide').style.display = 'flex';
-changeLanguage();
-}
-// ОТПРАВКА СООБЩЕНИЙ В ИИ ЧАТ-БОТ
-function sendChatMessage() {
-const input = document.getElementById('chatInput');
-const text = input.value.trim();
-if(!text) return;
-const area = document.getElementById('chatArea');
-// Сообщение пользователя
-const uMsg = document.createElement('div');
-uMsg.className = 'chat-msg msg-user';
-uMsg.innerText = text;
-area.appendChild(uMsg);
-input.value = '';
-// Эмуляция ответа ИИ
-setTimeout(() => {
-const bMsg = document.createElement('div');
-bMsg.className = 'chat-msg msg-bot';
-bMsg.innerText = 'Я проанализировал твой вопрос. Чтобы улучшить этот показатель в CS2, рекомендую зайти на карту CyberShok DM и сделать 100 киллов только в голову (One-tap).';
-area.appendChild(bMsg);
-area.scrollTop = area.scrollHeight;
-}, 800);
-}
-// ЗАПУСК ИНИЦИАЛИЗАЦИИ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ
-changeLanguage();
+        .panel-title {
+            margin: 0;
+            font-size: 26px;
+Используйте код с осторожностью.text-transform: uppercase;font-weight: 900;color: var(--t-neon);}.cabinet-box {background: var(--bg-input);border: 1px solid #222;border-radius: 8px;padding: 20px;margin-bottom: 20px;}.box-title {font-size: 18px;font-weight: bold;margin-top: 0;margin-bottom: 15px;text-transform: uppercase;color: var(--ct-neon);}/* ЛИЧНЫЙ ИИ ЧАТ-БОТ (ИНТЕРФЕЙС) */.chat-area {height: 220px;background: #0B0E14;border-radius: 6px;padding: 15px;overflow-y: auto;margin-bottom: 15px;border: 1px solid #222;display: flex;flex-direction: column;gap: 10px;}.chat-msg {max-width: 80%;padding: 10px 15px;border-radius: 8px;font-size: 14px;line-height: 1.4;}.msg-bot { background: var(--bg-card); color: white; align-self: flex-start; border-left: 3px solid var(--ct-neon); }.msg-user { background: var(--t-neon); color: white; align-self: flex-end; }/* ПРОФИЛЬНАЯ ПАНЕЛЬ */.profile-header-card {display: flex;align-items: center;gap: 20px;background: var(--bg-input);padding: 20px;border-radius: 8px;margin-bottom: 25px;}.profile-avatar-circle {width: 70px;height: 70px;border-radius: 50%;background: #2a475e;border: 3px solid var(--t-neon);box-shadow: 0 0 15px rgba(255, 106, 0, 0.4);}/* 5. ПОДВАЛ (ГАЙДЫ, ПАТЧИ, ТИКЕТЫ) */.bottom-sections {max-width: 1200px;margin: 80px auto;padding: 0 20px;display: flex;flex-direction: column;gap: 35px;}.info-block {background: var(--bg-card);border: 1px solid var(--border-color);border-radius: 10px;padding: 30px;box-shadow: 0 5px 15px rgba(0,0,0,0.3);}.block-title {font-size: 22px;margin-top: 0;margin-bottom: 15px;text-transform: uppercase;letter-spacing: 0.5px;}CACS2.AIРусский (RU)English (EN)Deutsch (DE)中文 (ZH)Polski (PL)Français (FR)Español (ES)Italiano (IT)Türkçe (TR)Українська (UK)Português (PT)Nederlands (NL)Svenska (SV)Suomi (FI)Norsk (NO)Dansk (DA)Čeština (CS)Magyar (HU)Română (RO)Български (BG)Ελληνικά (EL)العربية (AR)עברית (HE)हिन्दी (HI)日本語 (JA)한국어 (KO)ไทย (TH)Tiếng Việt (VI)Bahasa Indonesia (ID)Bahasa Melayu (MS)Твой личный ИИ-тренер,рынок и множество другогоТОЛЬКО НА НАШЕМ СЕРВЕРЕ!LOG IN / REGISTERПролистайте вниз, чтобы увидеть фишки проектаПанель управления фишками📚 Умные Гайды и РаскидкиНаша база знаний обновляется автоматически с помощью ИИ. Выберите карту под сеткой кружков.📊 Мониторинг Обновлений CS2ИИ анализирует каждый патч Valve в реальном времени и сразу же перестраивает тактики тренировок.✉️ Вопрос к Автору и ПоддержкаЕсть крутое предложение по улучшению кружков или нашли баг? Напишите автору напрямую.×Регистрация платформыВойти через SteamПодключить FACEIT<div class="panel-header>👤 Мой Профиль×HillemoonggStatus: Global AI Elite (VIP)🤖 Личный ИИ Чат-тренерПривет! Я твой персональный ИИ-ассистент. Спроси меня о раскидках, разборе твоей демки или экономике матча!>📊 Аналитика матчейТвой процент побед: 64%. Средний показатель хедшотов равен 52.4%. Точность зажима выросла.💾 Сохраненные демкиЗагружено демок: 3/10. Последний разбор: de_mirage (13:9) — ИИ обнаружил 4 ошибки позиционирования.Сменить аккаунт🛒 Маркет Скинов×Баланс: 4,500 Коинов ($45.00)Вывести балансAK-47 | Asimov$28.50M4A4 | Buzz Kill$14.20🤖 ИИ Оценка инвентаря×ИИ сканирует твой инвентарь Steam... Найдено 14 предметов общей стоимостью $114.50. Прогноз роста стоимости: +4.5% в следующем месяце.🎯 ИИ Тренер Демок×Загрузить файл матча (.dem)Запустить ИИ-Анализ🗺️ Тренировочные Карты (CyberShok)×Кликни по серверу, чтобы мгновенно скопировать IP адрес подключения в CS2:🔥 CYBERSHOK DM #1 (Mirage) - 185.189.15.42:27015🎯 CYBERSHOK Retake #4 (Inferno) - 185.189.15.43:27015Фишка платформы×Этот модуль ИИ успешно интегрирован в ядро платформы и запущен в тестовом режиме.// ИНВЕНТАРЬ СЕРВИСОВ (ИКОНКИ И ID КРУЖКОВ)const circleData = [{ icon: "👤", id: "p1" }, { icon: "🛒", id: "p2" }, { icon: "🤖", id: "p3" }, { icon: "🎯", id: "p4" },{ icon: "🗺️", id: "p5" }, { icon: "✈️", id: "p6" }, { icon: "📦", id: "p7" }, { icon: "⚖️", id: "p8" },{ icon: "📊", id: "p9" }, { icon: "🎁", id: "p10" }, { icon: "🏆", id: "p11" }, { icon: "👥", id: "p12" },{ icon: "🎬", id: "p13" }, { icon: "🎰", id: "p14" }, { icon: "🎤", id: "p15" }, { icon: "🔮", id: "p16" },{ icon: "🥇", id: "p17" }, { icon: "🛠️", id: "p18" }, { icon: "💬", id: "p19" }, { icon: "📑", id: "p20" }];let isLoggedIn = false; // Системный тумблер авторизации игрока// ПОЛНАЯ БАЗА ПЕРЕВОДОВ И ТЕКСТОВ НА 30 ЯЗЫКОВ МИРАconst translations = {ru: {slogan: <span class="ct-text">Твой личный ИИ-тренер</span>, <span class="t-text">рынок и множество другого</span> <span class="server-text">ТОЛЬКО НА НАШЕМ СЕРВЕРЕ!</span>,loginBtn: "Войти / Регистрация", footer: "Пролистайте вниз, чтобы увидеть фишки проекта", panel: "Панель управления фишками",guideT: "📚 Умные Гайды и Раскидки", guideD: "Наша база знаний обновляется автоматически с помощью ИИ. Выберите карту под сеткой кружков.",metaT: "📊 Мониторинг Обновлений CS2", metaD: "ИИ анализирует каждый патч Valve в реальном времени и сразу же перестраивает тактики тренировок.",authorT: "✉️ Вопрос к Автору и Поддержка", authorD: "Есть крутое предложение по улучшению кружков или нашли баг? Напишите автору напрямую.",modalT: "Регистрация платформы", holder: "Придумай ник на нашей платформе", steam: "Войти через Steam", faceit: "Подключить FACEIT",p1_h: "👤 Мой Профиль", p1_b1: "🤖 Личный ИИ Чат-тренер", p1_b2: "📊 Аналитика матчей", p1_b3: "💾 Сохраненные демки",p2_h: "🛒 Маркет Скинов", p2_bal: "Баланс: 4,500 Коинов ($45.00)", p2_btn: "Вывести баланс",p3_h: "🤖 ИИ Оценка инвентаря", p3_txt: "ИИ сканирует инвентарь Steam... Найдено предметов на $114.50.",p4_h: "🎯 ИИ Тренер Демок", p4_sub: "Загрузить файл матча (.dem)", p4_btn: "Запустить ИИ-Анализ",p5_h: "🗺️ Тренировочные Карты (CyberShok)", p5_txt: "Кликни по серверу, чтобы скопировать IP подключения:",circles: ["Мой Профиль", "Маркет", "ИИ Оценка", "ИИ Тренер", "Карты CS2", "ТГ-Бот", "ИИ Скины", "Трейд-Бот", "Трекер Меты", "Кейс-Дейлик", "Турниры", "Поиск Пати", "ИИ Клипы", "Контракты", "Озвучка ИИ", "Предикты", "Квесты", "Кастомизация", "Живой Чат", "База Знаний"]},en: {slogan: <span class="ct-text">Your personal AI coach</span>, <span class="t-text">market and much more</span> <span class="server-text">ONLY ON OUR SERVER!</span>,loginBtn: "Log In / Register", footer: "Scroll down to see project features", panel: "Feature Management Panel",guideT: "📚 Smart Guides & Smokes", guideD: "Our knowledge base updates automatically using AI. Choose a map under the circles grid.",metaT: "📊 CS2 Patch Monitoring", metaD: "AI analyzes every single Valve patch in real-time and recreates practice tactics.",authorT: "✉️ Contact Author & Support", authorD: "Have a suggestion or found a bug? Write directly to the author via tickets.",modalT: "Platform Registration", holder: "Create nickname on our platform", steam: "Log in via Steam", faceit: "Connect FACEIT",p1_h: "👤 My Profile", p1_b1: "🤖 Personal AI Chat-Coach", p1_b2: "📊 Match Analytics", p1_b3: "💾 Saved Demos Storage",p2_h: "🛒 Skin Market", p2_bal: "Balance: 4,500 Coins ($45.00)", p2_btn: "Withdraw balance",p3_h: "🤖 AI Inventory Evaluation", p3_txt: "AI is scanning your Steam inventory... Items value found: $114.50.",p4_h: "🎯 AI Demo Coach", p4_sub: "Upload match file (.dem)", p4_btn: "Start AI-Analysis",p5_h: "🗺️ Practice Maps (CyberShok)", p5_txt: "Click on any server to copy connection IP address:",circles: ["My Profile", "Market", "AI Evaluation", "AI Coach", "CS2 Maps", "TG-Bot", "AI Skins", "Trade-Bot", "Meta Tracker", "Daily Case", "Tournaments", "LFG Party", "AI Clips", "Contracts", "AI Voice", "Match Predicts", "Quests", "Customization", "Live Chat", "Knowledge Base"]}};// НАПОЛНЯЕМ ОСТАЛЬНЫЕ ЯЗЫКИ ШАБЛОНАМИ ДЛЯ ИСКЛЮЧЕНИЯ СБОЕВ СЕТКИconst all30Codes = ["de","zh","pl","fr","es","it","tr","uk","pt","nl","sv","fi","no","da","cs","hu","ro","bg","el","ar","he","hi","ja","ko","th","vi","id","ms"];all30Codes.forEach(c => { if(!translations[c]) { translations[c] = JSON.parse(JSON.stringify(translations["en"])); translations[c].loginBtn +=  (${c.toUpperCase()}); } });// МГНОВЕННЫЙ ЯЗЫКОВОЙ ПЕРЕВОД ВСЕХ СТРОКfunction changeLanguage() {const lang = document.getElementById('langSelect').value;const t = translations[lang] || translations["ru"];document.getElementById('sloganText').innerHTML = t.slogan;document.getElementById('mainLoginBtn').innerText = t.loginBtn;document.getElementById('footerText').innerText = t.footer;document.getElementById('panelTitle').innerText = t.panel;document.getElementById('guideTitle').innerText = t.guideT;document.getElementById('guideDesc').innerText = t.guideD;document.getElementById('metaTitle').innerText = t.metaT;document.getElementById('metaDesc').innerText = t.metaD;document.getElementById('authorTitle').innerText = t.authorT;document.getElementById('authorDesc').innerText = t.authorD;document.getElementById('modalTitle').innerText = t.modalT;document.getElementById('nickInput').placeholder = t.holder;document.getElementById('steamBtnText').innerText = t.steam;document.getElementById('faceitBtnText').innerText = t.faceit;// Перевод заголовков открывающихся фишекdocument.getElementById('p1_h').innerText = t.p1_h;document.getElementById('p1_b1').innerText = t.p1_b1;document.getElementById('p1_b2').innerText = t.p1_b2;document.getElementById('p1_b3').innerText = t.p1_b3;document.getElementById('p2_h').innerText = t.p2_h;document.getElementById('p2_bal').innerText = t.p2_bal;document.getElementById('p2_btn').innerText = t.p2_btn;document.getElementById('p3_h').innerText = t.p3_h;document.getElementById('p3_txt').innerHTML = t.p3_txt;document.getElementById('p4_h').innerText = t.p4_h;document.getElementById('p4_sub').innerText = t.p4_sub;document.getElementById('p4_btn').innerText = t.p4_btn;document.getElementById('p5_h').innerText = t.p5_h;document.getElementById('p5_txt').innerText = t.p5_txt;renderCirclesGrid(t.circles);}// РЕНДЕР 20 КРУЖКОВ В ЗАВИСИМОСТИ ОТ ЯЗЫКА И СТАТУСА ВХОДАfunction renderCirclesGrid(titlesArray) {const grid = document.getElementById('circlesGrid');grid.innerHTML = '';circleData.forEach((item, index) => {const title = titlesArray[index] || "Service";const card = document.createElement('div');card.className = 'circle-card';card.onclick = () => handleCircleClick(item.id, title);card.innerHTML = <div class="circle-icon">${item.icon}</div><div class="circle-title">${title}</div>;grid.appendChild(card);});}// УПРАВЛЕНИЕ КЛИКАМИ ПО КРУЖКАМfunction handleCircleClick(id, title) {if(!isLoggedIn) {toggleModal(true); // Если вход не выполнен, любой кружок кидает на регистрацию} else {// Если залогинен, открываем панель конкретной фишкиconst targetPanel = document.getElementById('panel_' + id);if(targetPanel) {targetPanel.style.display = 'flex';} else {// Общее универсальное окно для фишек без отдельного кодаdocument.getElementById('genericTitle').innerText = title;document.getElementById('panel_generic').style.display = 'flex';}}}function toggleModal(show) {document.getElementById('registerModal').style.display = show ? 'flex' : 'none';}function closePanel(id) {document.getElementById('panel_' + id).style.display = 'none';}// ЛОГИКА ИМИТАЦИИ УСПЕШНОГО ВХОДА (STEAM / FACEIT)function handleLogin() {const nick = document.getElementById('nickInput').value || "Hillemoongg";document.getElementById('prof_nick').innerText = nick;isLoggedIn = true;toggleModal(false);// Прячем приветственного спецназовца, оставляем панель кружков активнойdocument.getElementById('welcomeSlide').style.display = 'none';alert('Успешная авторизация через Steam Secure API API 2026!');// Открываем профиль игрока сразу после входаdocument.getElementById('panel_p1').style.display = 'flex';changeLanguage();}function logout() {isLoggedIn = false;closePanel('p1');document.getElementById('welcomeSlide').style.display = 'flex';changeLanguage();}// РАБОТА ИИ ЧАТ-БОТА ВНУТРИ ПРОФИЛЯfunction sendChatMessage() {const inp = document.getElementById('chatInput');const txt = inp.value.trim();if(!txt) return;const area = document.getElementById('chatArea');const uMsg = document.createElement('div');uMsg.className = 'chat-msg msg-user';uMsg.innerText = txt;area.appendChild(uMsg);inp.value = '';setTimeout(() => {const bMsg = document.createElement('div');bMsg.className = 'chat-msg msg-bot';bMsg.innerText = "ИИ-Тренер проанализировал твой лог. Твоя основная ошибка: плохой контроль спрея на дальних дистанциях de_mirage. Рекомендую зайти на карту CyberShok (кружок №5) и потренировать тэппинг.";area.appendChild(bMsg);area.scrollTop = area.scrollHeight;}, 700);}// СТАРТОВАЯ ИНИЦИАЛИЗАЦИЯchangeLanguage();
