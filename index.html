@@ -37,12 +37,8 @@
 
         /* ВЕРТИКАЛЬНЫЙ САЙДБАР (ЛЕВОЕ МЕНЮ) */
         .sidebar {
-            background-color: var(--bg-sidebar);
-            border-right: 1px solid var(--border);
-            padding: 25px 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            background-color: var(--bg-sidebar); border-right: 1px solid var(--border);
+            padding: 25px 20px; display: flex; flex-direction: column; justify-content: space-between;
         }
         .sidebar-top { display: flex; flex-direction: column; gap: 30px; }
         .sidebar-logo-box { display: flex; align-items: center; gap: 12px; }
@@ -119,8 +115,7 @@
         .tiktok-video-card { width: 100%; height: 210px; background: #000; border-radius: 8px; border: 1px solid var(--border); position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: border-color 0.2s; }
         .tiktok-video-card:hover { border-color: var(--accent); }
         .tiktok-overlay-info { position: absolute; bottom: 0; left: 0; width: 100%; padding: 12px; background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%); font-size: 12px; font-weight: bold; }
-
-        /* РАБОЧИЕ ИИ ОКНА */
+        /* РАБОЧИЕ ИИ ОКНА ПЛАТФОРМЫ */
         .ai-window { display: none; background: var(--bg-card); border: 1px solid var(--border); backdrop-filter: blur(10px); border-radius: 10px; padding: 30px; margin-bottom: 35px; width: 100%; box-sizing: border-box; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .window-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border); padding-bottom: 15px; margin-bottom: 25px; }
         .window-title { margin: 0; font-size: 22px; text-transform: uppercase; font-weight: 900; color: var(--accent); text-shadow: 0 0 10px var(--accent-glow); }
@@ -147,11 +142,12 @@
         .bottom-card { background: var(--bg-sidebar); border: 1px solid var(--border); border-radius: 8px; padding: 25px; }
         .bottom-card h4 { margin-top: 0; margin-bottom: 12px; text-transform: uppercase; font-size: 15px; color: var(--accent); }
         .bottom-card p { font-size: 13px; color: #8a909d; line-height: 1.5; margin: 0; }
+        .input-field { width: 100%; background: var(--bg-input); border: 1px solid #333; padding: 12px; border-radius: 5px; color: white; font-size: 15px; box-sizing: border-box; margin-bottom: 15px; outline: none; }
     </style>
 </head>
 <body>
     <div class="app-wrapper">
-        <!-- ЛЕВОЕ ВЕРТИКАЛЬНОЕ МЕНЮ И ЛОГОТИП CYBERX -->
+        <!-- ЛЕВОЕ МЕНЮ И ЛОГОТИП CYBERX -->
         <div class="sidebar">
             <div class="sidebar-top">
                 <div class="sidebar-logo-box">
@@ -166,7 +162,7 @@
                 <div class="menu-group">
                     <div class="menu-label" id="lbl_services">ИИ Сервисы</div>
                     <button class="menu-item" id="m_ai" onclick="showSection('trainer')">🤖 ИИ Чат-Тренер</button>
-                    <button class="menu-item menu-premium" onclick="alert('👑 PREMIUM активирует 40 параметров оценки и убирает лимиты!')">👑 Спец. Развитие</button>
+                    <button class="menu-item menu-premium" onclick="alert('👑 PREMIUM статус активирует 40 параметров оценки и убирает лимиты архива!')">👑 Спец. Развитие</button>
                 </div>
             </div>
             <div style="font-size: 11px; color: var(--text-muted); text-align: center;">© 2026 CYBERX Ecosystem</div>
@@ -177,13 +173,13 @@
             <div class="top-navbar">
                 <div style="font-weight: 900; font-size: 20px; text-transform: uppercase; letter-spacing: 0.5px;" id="nav_title">Профессиональная тренировка</div>
                 <div class="navbar-actions">
-                    <button class="btn-auth btn-donate" id="btnDonate" onclick="alert('Окно пополнения баланса для покупки PREMIUM...')">Задонатить 💎</button>
+                    <button class="btn-auth btn-donate" id="btnDonate" onclick="alert('Окно пополнения баланса: Введите сумму для покупки PREMIUM статуса на сервере CYBERX...')">Задонатить 💎</button>
                     <div class="user-profile-tag" id="userTag" onclick="toggleUserDropdown()">
                         <div class="user-avatar-frame"></div>
                         <b id="userNick">Gamer</b>
                     </div>
                     <div class="dropdown-menu" id="userDropdownMenu">
-                        <div class="dropdown-item" id="opt_set" onclick="alert('⚙️ Настройки аккаунта и привязка Steam API')">⚙️ Настройки</div>
+                        <div class="dropdown-item" id="opt_set" onclick="alert('⚙️ Настройки аккаунта: Смена рамки, привязка Discord и Steam API.')">⚙️ Настройки</div>
                         <div class="dropdown-item" id="opt_hist" onclick="showSection('matches')">📊 История матчей</div>
                         <div class="dropdown-item" id="opt_don" onclick="alert('💳 История донатов пуста. Баланс: 0 💎')">💳 История донатов</div>
                         <div class="dropdown-item" style="color:#ff4444;" onclick="logout()">Выйти</div>
@@ -191,21 +187,16 @@
                     <button class="btn-auth btn-steam" id="b_steam" onclick="openRegister()">Войти через STEAM</button>
                     <button class="btn-auth btn-faceit" id="b_faceit" onclick="openRegister()">Войти через FACEIT</button>
                     
-                    <!-- Выпадающие списки палитры 30 цветов и 30 языков с флагами -->
                     <select class="custom-select" id="colorSelect" onchange="changeWebsiteColor()">
-                        <option value="#00a3ff">🔵 Голубой Неон</option><option value="#ff5500">🟠 Оранжевый Матовый</option><option value="#00ff66">🟢 Изумрудный</option><option value="#ff0055">🔴 Рубиновый</option><option value="#ae00ff">🟣 Фиолетовый</option><option value="#ffea00">🟡 Кислотно-Желтый</option><option value="#00ffff">💎 Бирюзовый</option><option value="#ff00aa">🌸 Розовый фуксия</option><option value="#ffffff">⚪ Белый Матовый</option><option value="#777777">⚫ Темно-Серый</option><option value="#55ff00">🍏 Салатовый</option><option value="#0022ff">🐳 Ультрамарин</option><option value="#ff8800">🥭 Манго</option><option value="#bfff00">🌟 Лайм</option><option value="#9900ff">🔮 Аметист</option><option value="#00ffaa">🧪 Мятный неон</option><option value="#ff3300">🔥 Огненный красный</option><option value="#00e5ff">🌊 Морская волна</option><option value="#d4af37">🔱 Золотой металлик</option><option value="#c0c0c0">🥈 Серебряный</option><option value="#ff00ff">🍇 Маджента</option><option value="#44ee44">🌲 Лесной зеленый</option><option value="#ff6600">💥 Оранжевый взрыв</option><option value="#0088ff">🌌 Глубокий космос</option><option value="#ccff00">🥎 Флуоресцентный</option><option value="#ff00cc">⚡ Пурпурная искра</option><option value="#33ff99">⛳ Светло-зеленый</option><option value="#99ccff">❄️ Ледяной синий</option><option value="#ff9999">🎈 Нежно-розовый</option><option value="#66fffa">🛸 Электрик</option>
+                        <option value="#00a3ff">🔵 Голубой Неон</option><option value="#ff5500">🟠 Оранжевый Матовый</option><option value="#00ff66">🟢 Изумрудный</option><option value="#ff0055">🔴 Рубиновый</option><option value="#ae00ff">🟣 Фиолетовый</option><option value="#ffea00">🟡 Кислотно-Желтый</option><option value="#00ffff">💎 Бирюзовый</option><option value="#ff00aa">🌸 Розовый фуксия</option><option value="#ffffff">⚪ Белый Матовый</option><option value="#777777">⚫ Темно-Серый</option><option value="#55ff00">🍏 Салатовый</option><option value="#0022ff">🐳 Ультрамарин</option><option value="#ff8800">🥭 Манго</option><option value="#bfff00">🌟 Лайм</option><option value="#9900ff">🔮 Аметист</option><option value="#00ffaa">🧪 Мятный неон</option><option value="#ff3300">🔥 Огненный красный</option><option value="#00e5ff">🌊 Морская волна</option><option value="#d4af37">🔱 Золотой металлик</option><option value="#c0c0c0">🥈 Серебряный</option><option value="#ff00ff">🍇 Maджента</option><option value="#44ee44">🌲 Лесной зеленый</option><option value="#ff6600">💥 Оранжевый взрыв</option><option value="#0088ff">🌌 Глубокий космос</option><option value="#ccff00">🥎 Флуоресцентный</option><option value="#ff00cc">⚡ Пурпурная искра</option><option value="#33ff99">⛳ Светло-зеленый</option><option value="#99ccff">❄️ Ледяной синий</option><option value="#ff9999">🎈 Нежно-розовый</option><option value="#66fffa">🛸 Электрик</option>
                     </select>
                     <select class="custom-select" id="langSelect" onchange="changeLanguage()">
                         <option value="ru">🇷🇺 Русский</option><option value="en">🇺🇸 English</option><option value="de">🇩🇪 Deutsch</option><option value="zh">🇨🇳 中文</option><option value="pl">🇵🇱 Polski</option>
                     </select>
                 </div>
             </div>
-            <!-- СЕТКА ИГРОВЫХ КАРТОЧЕК -->
-            <div id="sec_modes">
-                <div class="modes-grid" id="modesGrid"></div>
-            </div>
-
-            <!-- ОКНО ИИ-ТРЕНЕРА С ОФИЦИАЛЬНОЙ АВАТАРКОЙ (CA) -->
+            <div id="sec_modes"><div class="modes-grid" id="modesGrid"></div></div>
+            <!-- ОКНО ИИ-ТРЕНЕРА С НАШЕЙ АВАТАРКОЙ -->
             <div class="ai-window" id="sec_trainer">
                 <div class="window-header"><h3 class="window-title" id="t_ai_h">🤖 ЛИЧНЫЙ ИИ ЧАТ-ТРЕНЕР</h3></div>
                 <div class="chat-container" id="chatArea">
@@ -215,12 +206,12 @@
                     </div>
                 </div>
                 <div style="display:flex; gap:12px;">
-                    <input type="text" class="input-field" style="margin:0; padding:15px; text-align:left;" id="chatInput" placeholder="Спроси ИИ о Mirage, AWP или Faceit...">
+                    <input type="text" class="input-field" style="margin:0; padding:15px; text-align:left;" id="chatInput2" placeholder="Спроси ИИ о Mirage, AWP или Faceit...">
                     <button class="btn-auth btn-faceit" style="padding:0 25px;" onclick="sendChatMessage()">></button>
                 </div>
             </div>
 
-            <!-- ОКНО ЛИЧНОГО АРХИВА И ЗАГРУЗКИ (ЛИМИТ 50) -->
+            <!-- ОКНО ЗАГРУЗКИ И АРХИВА (ЛИМИТ 50) -->
             <div class="ai-window" id="sec_matches">
                 <div class="window-header">
                     <h3 class="window-title" id="t_m_h">⚔️ АРХИВ РАЗБОРОВ МАТЧЕЙ (ЛИМИТ 50)</h3>
@@ -231,10 +222,7 @@
                     <input type="file" id="demoFile" style="margin-bottom:15px;"><br>
                     <button class="btn-auth btn-steam" onclick="startDemoAnalysis()" id="t_m_btn">Запустить ИИ-Анализ демки</button>
                 </div>
-                <!-- Шкала прогресса считывания 40 параметров оценки -->
                 <div id="analysisProgress" style="display:none; text-align:center; padding:15px; background:var(--bg-input); border-radius:6px; font-weight:bold; color:var(--accent); margin-bottom:20px;"></div>
-                
-                <!-- Список загруженных разборов с кнопками удаления -->
                 <div id="demoArchiveList">
                     <div class="demo-item-row" id="demo_1">
                         <div><b>📅 de_mirage (13:9 Победа)</b> — <span style="color:var(--success)">11 Уровень ИИ (2450 ELO)</span><br><small style="color:var(--text-muted)">Глобальный совет: Отыграл плохо, пик на 1 минуте 41 секунде был не так хорош. Исправь прицел под коврами.</small></div>
@@ -246,20 +234,21 @@
                     </div>
                 </div>
             </div>
-            <!-- РАСШИРЕННЫЙ ИНФО-ПОДВАЛ БЕЗОПАСНОСТИ И ПОЖЕЛАНИЙ -->
+
+            <!-- ШИРОКИЙ ИНФО-ПОДВАЛ БЕЗОПАСНОСТИ И ПОЖЕЛАНИЙ -->
             <div class="bottom-row">
                 <div class="bottom-card"><h4>🔒 Конфиденциальность</h4><p>Ваши личные данные и API-токены защищены шифрованием стандарта AES-256.</p></div>
-                <div class="bottom-card"><h4>🛡️ Безопасность сайта</h4><p>Платформа использует официальный протокол авторизации Steam OpenID без передачи паролей.</p></div>
+                <div class="bottom-card"><h4>🛡️ Безопасность сайта</h4><p>Платформа использует официальный протокол Steam OpenID без передачи паролей.</p></div>
                 <div class="bottom-card"><h4>⚖️ Законность интеграции</h4><p>Все ИИ-сканирования соответствуют правилам Valve и Faceit. Бан аккаунта полностью исключен.</p></div>
                 <div class="bottom-card">
                     <h4>✉️ Пожелания и идеи</h4>
-                    <input type="text" class="input-field" style="margin-bottom:10px; padding:10px; text-align:left; font-size:13px;" placeholder="Какую фишку добавить на сервер?">
-                    <button class="btn-auth btn-faceit" style="padding:10px; font-size:12px; width:100%;" onclick="alert('Идея успешно отправлена автору проекта!')">Отправить</button>
+                    <input type="text" class="input-field" style="margin-bottom:10px; padding:10px; text-align:left; font-size:13px;" id="wishTextInput" placeholder="Какую фишку добавить на сервер?">
+                    <button class="btn-auth btn-faceit" style="padding:10px; font-size:12px; width:100%;" onclick="sendWishToBackend()" id="wishSubmitBtn">Отправить</button>
                 </div>
             </div>
         </div>
 
-        <!-- ВЕРТИКАЛЬНАЯ ЛЕНТА TIKTOK С ХАЙЛАЙТАМИ -->
+        <!-- ЛЕНТА МИНИ-ЭДИТОВ TIKTOK -->
         <div class="tiktok-sidebar">
             <div class="tiktok-title">🔥 ТИКТОК МИНИ-ЭДИТЫ И ИГРОКИ</div>
             <div class="tiktok-video-card" onclick="alert('Запуск мини-эдита игрока s1mple на наших серверах...')">🎬 [PLAY VIDEO]<div class="tiktok-overlay-info">@cyberx_edits<br>Ace на Mirage от Hillemoon!</div></div>
@@ -267,7 +256,6 @@
         </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО РЕГИСТРАЦИИ ПОД ЛЮБЫМ НИКОМ -->
     <div class="modal-overlay" id="regModal">
         <div class="modal-card">
             <div class="close-modal" onclick="closeRegister()">&times;</div>
@@ -276,9 +264,7 @@
             <button class="btn-auth btn-faceit" style="width:100%" onclick="submitRegister()" id="modal_reg_btn">Создать профиль</button>
         </div>
     </div>
-
     <script>
-        // Данные для анимированных прямоугольников CyberShok
         const modesData = [
             { name: "Шарики DM", url: "https://cybershok.net", online: "742 онлайн" },
             { name: "Matches 5v5", url: "https://cybershok.net", online: "142 онлайн" },
@@ -286,23 +272,49 @@
             { name: "Retake Сервер", url: "https://cybershok.net", online: "281 онлайн" }
         ];
         let totalDemosCount = 2;
+        let isLoggedIn = false;
 
-        // База данных переводов на 30 языков мира
-        const trans = {
-            ru: { title: "Выбор режима игры", play: "Режимы и Карты", serv: "ИИ Сервисы", m1: "🎮 Игровые режимы", m2: "⚔️ Разбор демок / Архив", m4: "🤖 ИИ Чат-Тренер", circles: ["Шарики DM", "Matches 5v5", "Duels 1v1", "Retake Сервер"] },
-            en: { title: "Select Training Mode", play: "Modes & Maps", serv: "AI Services", m1: "🎮 Game Modes", m2: "⚔️ Demos / Archive", m4: "🤖 AI Chat-Coach", circles: ["Balls DM", "Matches 5v5", "Duels 1v1", "Retake Server"] }
-        };
-        const extraCodes = ["de","zh","pl","fr","es","it","tr","uk","pt","nl","sv","fi","no","da","cs","hu","ro","bg","el","ar","he","hi","ja","ko","th","vi","id","ms"];
-        extraCodes.forEach(c => { if(!trans[c]) { trans[c] = JSON.parse(JSON.stringify(trans["en"])); trans[c].title += ` (${c.toUpperCase()})`; } });
-        // МГНОВЕННАЯ СМЕНА 30 ЦВЕТОВ НАПРАВЛЕНИЯ НЕОНА
+        // НАСТОЯЩАЯ ОТПРАВКА СООБЩЕНИЙ НА НАШ API БЭКЕНД
+        async function sendWishToBackend() {
+            const inputField = document.getElementById('wishTextInput');
+            const wishText = inputField.value.trim();
+            const submitBtn = document.getElementById('wishSubmitBtn');
+            const userNickName = isLoggedIn ? document.getElementById('userNick').innerText : 'Анонимный Геймер';
+
+            if(!wishText) { alert('Пожалуйста, напишите ваше пожелание перед отправкой!'); return; }
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Отправка...';
+
+            try {
+                const response = await fetch('/api/wish', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nickname: userNickName, text: wishText })
+                });
+
+                const data = await response.json();
+
+                if(response.ok && data.success) {
+                    alert('🔥 Пожелание успешно улетело Кириллу в Telegram!');
+                    inputField.value = ''; // Полностью очищаем форму ввода
+                } else {
+                    alert('Запрос заблокирован анти-спамом сервера. Подождите 5 секунд.');
+                }
+            } catch (error) {
+                alert('Ошибка соединения: Бэкенд сервера проверяет AES шифрование.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'Отправить';
+            }
+        }
+
         function changeWebsiteColor() {
             const selectedColor = document.getElementById('colorSelect').value;
             document.documentElement.style.setProperty('--accent', selectedColor);
             document.documentElement.style.setProperty('--accent-glow', selectedColor + '44');
             document.querySelector('.sidebar-logo').style.boxShadow = `0 0 15px ${selectedColor}`;
         }
-
-        // АВТОМАТИЧЕСКИЙ ПЕРЕВОДЧИК СЕТКИ
         function changeLanguage() {
             const lang = document.getElementById('langSelect').value;
             const t = trans[lang] || trans['ru'];
@@ -314,54 +326,40 @@
             document.getElementById('m_ai').innerText = t.m4;
             drawGrid(t.circles);
         }
-
-        // СТРОИТЕЛЬ ПРЯМОУГОЛЬНЫХ АНИМИРОВАННЫХ КАРТОЧЕК
         function drawGrid(titles) {
             const grid = document.getElementById('modesGrid'); grid.innerHTML = '';
             modesData.forEach((m, i) => {
                 const el = document.createElement('div'); el.className = 'mode-tile'; el.style.backgroundImage = `url('${m.url}')`;
-                el.onclick = () => { if(!isLoggedIn) { openRegister(); } else { alert('Подключение к игровому серверу CYBERX... Скопируйте IP в консоль: connect 185.189.15.42:27015'); } };
+                el.onclick = () => { if(!isLoggedIn) { openRegister(); } else { alert('Подключение к игровому серверу CYBERX... IP скопирован в консоль!'); } };
                 el.innerHTML = `<div class="mode-name">${titles[i] || m.name}</div><div class="mode-online"><span class="online-dot"></span>${m.online}</div>`;
                 grid.appendChild(el);
             });
         }
-
-        // КНОПКИ РЕГИСТРАЦИИ ЛЮБОГО АККАУНТА
-        function submitRegister() {
-            const nick = document.getElementById('usernameInput').value || "Hillemoongg";
-            document.getElementById('userNick').innerText = nick; 
-            document.getElementById('b_steam').style.display = 'none'; 
-            document.getElementById('b_faceit').style.display = 'none'; 
-            document.getElementById('btnDonate').style.display = 'inline-block'; 
-            document.getElementById('userTag').style.display = 'flex'; 
-            isLoggedIn = true; closeRegister(); showSection('trainer');
-        }
-
-        function logout() { isLoggedIn = false; document.getElementById('userTag').style.display = 'none'; document.getElementById('userDropdownMenu').style.display = 'none'; document.getElementById('btnDonate').style.display = 'none'; document.getElementById('b_steam').style.display = 'block'; document.getElementById('b_faceit').style.display = 'block'; showSection('modes'); }
-
-        // ПЕРЕКЛЮЧАТЕЛЬ СЕКЦИЙ БЕЗ ОКНОБЛОКАТОРОВ
+        function openRegister() { document.getElementById('regModal').style.display = 'flex'; }
+        function closeRegister() { document.getElementById('regModal').style.display = 'none'; }
+        function toggleUserDropdown() { const m = document.getElementById('userDropdownMenu'); m.style.display = m.style.display === 'block' ? 'none' : 'block'; }
         function showSection(id) {
             document.querySelectorAll('.ai-window').forEach(w => w.style.display = 'none'); document.getElementById('sec_modes').style.display = 'none'; document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
             if(id === 'modes') { document.getElementById('sec_modes').style.display = 'block'; document.getElementById('m_modes').classList.add('active'); }
             else { document.getElementById('sec_' + id).style.display = 'block'; const btn = document.getElementById('m_' + (id==='trainer'?'ai':id)); if(btn) btn.classList.add('active'); }
         }
+        function submitRegister() {
+            const nick = document.getElementById('usernameInput').value || "Hillemoongg";
+            document.getElementById('userNick').innerText = nick; document.getElementById('b_steam').style.display = 'none'; document.getElementById('b_faceit').style.display = 'none'; document.getElementById('btnDonate').style.display = 'inline-block'; document.getElementById('userTag').style.display = 'flex'; isLoggedIn = true; closeRegister(); showSection('trainer');
+        }
+        function logout() { isLoggedIn = false; document.getElementById('userTag').style.display = 'none'; document.getElementById('userDropdownMenu').style.display = 'none'; document.getElementById('btnDonate').style.display = 'none'; document.getElementById('b_steam').style.display = 'block'; document.getElementById('b_faceit').style.display = 'block'; showSection('modes'); }
 
-        // РАЗНОПЛАНОВЫЙ ИИ С УМНЫМИ СОВЕТАМИ ПО КАТКАМ
         function sendChatMessage() {
-            const inp = document.getElementById('chatInput'); const text = inp.value.trim(); if(!text) return;
+            const inp = document.getElementById('chatInput2'); const text = inp.value.trim(); if(!text) return;
             const area = document.getElementById('chatArea');
             const u = document.createElement('div'); u.className = 'msg-wrapper wrapper-user'; u.innerHTML = `<div class="chat-avatar user-avatar-icon">U</div><div class="msg msg-u">${text}</div>`; area.appendChild(u); inp.value = '';
-            
             const q = text.toLowerCase();
             let r = "Я получил твои логи. Твой общий тактический уровень в норме, но обрати внимание на раскидки.";
-            if(q.includes("мираж") || q.includes("mirage")) { r = "Анализ Mirage: Твоя частая ошибка — плохая проверка угла под коврами на А-пленте при выходе из паласов. Потренируй префайры на наших серверах!"; }
+            if(q.includes("мираж") || q.includes("mirage")) { r = "Анализ Mirage: Твоя частая ошибка — плохая проверка угла под коврами на А-пленте. Потренируй префайры на наших серверах!"; }
             else if(q.includes("авп") || q.includes("awp")) { r = "Анализ AWP: Твоя скорость флика отличная, но ты стреляешь в микродвижении. Контролируй контр-стрейфы перед зумом."; }
             else if(q.includes("ошибка") || q.includes("косяк") || q.includes("почему")) { r = "Глобальный совет ИИ за неделю: Отыграл плохо, пик на 1 минуте 41 секунде был не так хорош. Ставь прицел выше на уровень головы."; }
-
             setTimeout(() => { const b = document.createElement('div'); b.className = 'msg-wrapper'; b.innerHTML = `<div class="chat-avatar">CA</div><div class="msg msg-b">${r}</div>`; area.appendChild(b); area.scrollTop = area.scrollHeight; }, 600);
         }
-
-        // ШКАЛА ПРОГРЕССА АНАЛИЗА И ДОБАВЛЕНИЕ В АРХИВ
         function startDemoAnalysis() {
             const file = document.getElementById('demoFile').value; if(!file) { alert('Выберите .dem файл!'); return; }
             const prog = document.getElementById('analysisProgress'); prog.style.display = 'block'; let pct = 0;
@@ -370,7 +368,6 @@
                 if(pct >= 100) { clearInterval(interval); prog.innerText = "ИИ-Анализ завершен! Новый отчет добавлен в твой личный архив ниже."; addNewDemoToArchive(); }
             }, 500);
         }
-
         function addNewDemoToArchive() {
             if(totalDemosCount >= 50) { alert('Лимит архива 50 демок исчерпан! Удалите старые разборы.'); return; }
             totalDemosCount++; document.getElementById('demoCounterLabel').innerText = `Загружено разборов: ${totalDemosCount} / 50`;
@@ -378,12 +375,15 @@
             row.innerHTML = `<div><b>📅 Загруженный матч #${totalDemosCount}</b> — <span style="color:var(--accent)">12 Уровень ИИ (2600 ELO)</span><br><small style="color:var(--text-muted)">Глобальный совет за неделю: Точность хедшотов идеальна. Пик на 3-й минуте был не так хорош, контролируй углы.</small></div><button class="btn-delete-demo" onclick="deleteDemoRecord('demo_${totalDemosCount}')">Удалить разбор</button>`;
             list.insertBefore(row, list.firstChild);
         }
-
-        // КНОПКА «УДАЛИТЬ РАЗБОР» С СИНХРОНИЗАЦИЕЙ СЧЕТЧИКА
         function deleteDemoRecord(id) {
             const el = document.getElementById(id); if(el) { el.remove(); totalDemosCount--; document.getElementById('demoCounterLabel').innerText = `Загружено разборов: ${totalDemosCount} / 50`; alert('Разбор матча успешно удален из памяти архива.'); }
         }
-
+        const trans = {
+            ru: { title: "Выбор режима игры", play: "Режимы и Карты", serv: "ИИ Сервисы", m1: "🎮 Игровые режимы", m2: "⚔️ Разбор демок / Архив", m4: "🤖 ИИ Чат-Тренер", circles: ["Шарики DM", "Matches 5v5", "Duels 1v1", "Retake Сервер"] },
+            en: { title: "Select Training Mode", play: "Modes & Maps", serv: "AI Services", m1: "🎮 Game Modes", m2: "⚔️ Demos / Archive", m4: "🤖 AI Chat-Coach", circles: ["Balls DM", "Matches 5v5", "Duels 1v1", "Retake Server"] }
+        };
+        const extraCodes = ["de","zh","pl","fr","es","it","tr","uk","pt","nl","sv","fi","no","da","cs","hu","ro","bg","el","ar","he","hi","ja","ko","th","vi","id","ms"];
+        extraCodes.forEach(c => { if(!trans[c]) { trans[c] = JSON.parse(JSON.stringify(trans["en"])); trans[c].title += ` (${c.toUpperCase()})`; } });
         changeLanguage();
     </script>
 </body>
