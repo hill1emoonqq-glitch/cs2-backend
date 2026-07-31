@@ -1,6 +1,10 @@
 {
-  "name": "cs2-backend",
+  "name": "cyberx-ai-backend",
   "version": "1.0.0",
-  "description": "CS2 AI Platform",
-  "dependencies": {}
+  "description": "CyberX Esports Platform AI Backend",
+  "main": "api/server.js",
+  "dependencies": {
+    "express": "^4.19.2",
+    "cors": "^2.8.5"
+  }
 }
