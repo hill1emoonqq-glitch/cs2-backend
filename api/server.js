@@ -7,7 +7,8 @@ app.use(cors());
 app.use(express.json());
 
 // ТВОИ НАСТОЯЩИЕ ПРОВЕРЕННЫЕ ДАННЫЕ СВЯЗИ
-const TELEGRAM_TOKEN = '8977188373:AAEHcioQP5OtRYFfChDKpqx6ohy2paCnPPk';
+const TELEGRAM_TOKEN = 'const TELEGRAM_TOKEN = '8977188373:AAHHuPE2uG_83AuQE1a-slv-d3lnwLBt6Kw';
+';
 const TELEGRAM_CHAT_ID = '2003160617';
 const antiSpamMap = new Map();
 
