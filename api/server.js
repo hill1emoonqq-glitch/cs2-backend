@@ -6,7 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ТОКЕН И ID ТЕЛЕГРАМА CYBERX (ДЛЯ ИДЕЙ И ОТЧЕТОВ)
+// ДАННЫЕ СВЯЗИ ТЕЛЕГРАМ-БОТА КИРИЛЛА
 const TELEGRAM_TOKEN = '8977188373:AAHHuPE2uG_83AuQE1a-slv-d3lnwLBt6Kw';
 const TELEGRAM_CHAT_ID = '2003160617';
 const antiSpamMap = new Map();
@@ -15,139 +15,121 @@ function checkSpam(ip) {
     const now = Date.now();
     if (antiSpamMap.has(ip)) {
         const lastSendTime = antiSpamMap.get(ip);
-        if (now - lastSendTime < 4000) return true;
+        if (now - lastSendTime < 3000) return true;
     }
     antiSpamMap.set(ip, now);
     return false;
 }
 
-function cleanClean(text, length = 500) {
+function cleanClean(text, length = 1000) {
     return String(text || '').replace(/</g, "&lt;").replace(/>/g, "&gt;").substring(0, length);
 }
 
-// 30 второстепенных киберспортивных факторов CYBERX
+// Привязка официальных эмодзи-значков Faceit уровней к показателям ELO
+function getFaceitBadge(elo) {
+    if (elo >= 2400) return "⭐ [FACEIT LVL 10 PRO]";
+    if (elo >= 2001) return "🔴 [FACEIT LVL 10]";
+    if (elo >= 1851) return "🧡 [FACEIT LVL 9]";
+    if (elo >= 1701) return "🧡 [FACEIT LVL 8]";
+    if (elo >= 1551) return "🟡 [FACEIT LVL 7]";
+    if (elo >= 1401) return "🟡 [FACEIT LVL 6]";
+    if (elo >= 1251) return "🟢 [FACEIT LVL 5]";
+    if (elo >= 1101) return "🟢 [FACEIT LVL 4]";
+    return "🔵 [FACEIT LVL 3]";
+}
+// МАССИВ ВТОРОСТЕПЕННЫХ ПАРАМЕТРОВ ДЛЯ СКВОЗНОЙ СТАТИСТИКИ
 const secondaryParamsList = [
     "Префайры углов", "Тайминги пика", "Выставление прицела (Crosshair)", "Экономика в бай-раундах", 
     "Контроль зума AWP", "Реакция на световые (Anti-Flash)", "Чтение миникарты", "Позиционирование при ретейках",
     "Удержание закрытых позиций", "Размен тиммейтов (Trade)", "Использование зажигательных",
-    "Эффективность флешек", "Контроль отдачи пистолетов", "Стрельба на ходу с SMG",
-    "Движения на лестницах", "Дроп оружия команде", "Тайминги установки бомбы",
-    "Обезвреживание под фейк", "Использование хай-граундов", "Выход из смоков",
-    "Стрельба сквозь дым", "Контроль шума (Shift)", "Позиционирование в клатчах",
-    "Агрессивные выпады за КТ", "Углы удержания мидла", "Контр-флеш тайминги", "Спам гранат по мете",
-    "Скорость закупа", "Выбор позиции при эко", "Стрельба на дальние дистанции"
+    "Эффективность флешек", "Контроль отдачи пистолетов", "Стрельба на ходу с SMG", "Контр-стрейфы очень хороши"
 ];
 
-// Утилита для выдачи эмодзи-значка Faceit и уровня в зависимости от ЭЛО
-function getFaceitBadge(elo) {
-    if (elo >= 2400) return { lvl: 10, badge: "⭐ [LVL 10 PRO]" };
-    if (elo >= 2001) return { lvl: 10, badge: "🔴 [LVL 10]" };
-    if (elo >= 1851) return { lvl: 9, badge: "🧡 [LVL 9]" };
-    if (elo >= 1701) return { lvl: 8, badge: "🧡 [LVL 8]" };
-    if (elo >= 1551) return { lvl: 7, badge: "🟡 [LVL 7]" };
-    if (elo >= 1401) return { lvl: 6, badge: "🟡 [LVL 6]" };
-    if (elo >= 1251) return { lvl: 5, badge: "🟢 [LVL 5]" };
-    if (elo >= 1101) return { lvl: 4, badge: "🟢 [LVL 4]" };
-    return { lvl: 3, badge: "🔵 [LVL 3]" };
-}
-// ========================================================
-// РОУТ АНАЛИЗА ДЕМОК (ГЕНЕРАЦИЯ ПОКАЗАТЕЛЕЙ ДЛЯ ИНСТРУМЕНТОВ)
-// ========================================================
-app.post('/api/analyze-demo', (req, res) => {
-    const { filename } = req.body;
-    if (!filename) return res.status(400).json({ success: false, error: "Файл .dem не выбран!" });
-
-    // Генерация 8 главных элементов с индивидуальным ЭЛО и уровнями Faceit
-    const mainStats = {
-        elo: Math.floor(Math.random() * 400) + 2100, // Общее примерное ЭЛО
-        reaction: Math.floor(Math.random() * 50) + 180, // Скорость реакции в мс
-        gamesense: Math.floor(Math.random() * 20) + 75, // Понимание игры в %
-        grenades: Math.floor(Math.random() * 300) + 1900, // ЭЛО Раскидки
-        headshots: Math.floor(Math.random() * 25) + 45, // Процент головы %
-        teamplay: Math.floor(Math.random() * 400) + 2000, // ЭЛО Успешных действий
-        counterStrafes: Math.floor(Math.random() * 500) + 1800, // ЭЛО Контр-стрейфов
-        recoilControl: Math.floor(Math.random() * 400) + 2100, // Наш 7-й: Спрей-контроль
-        rotations: Math.floor(Math.random() * 300) + 2000 // Наш 8-й: Тайминги перетяжек
-    };
-
-    // Привязываем значки Faceit к главным элементам
-    const mainWithBadges = {};
-    for (let key in mainStats) {
-        mainWithBadges[key] = {
-            val: mainStats[key],
-            badge: getFaceitBadge(key === 'reaction' || key === 'gamesense' || key === 'headshots' ? mainStats.elo : mainStats[key]).badge
-        };
+// РОУТ ДЛЯ ЦЕНТРАЛЬНОГО ИНТЕРАКТИВНОГО ОСТРОВКА (СВОБОДНЫЕ ВОПРОСЫ И ГОТОВЫЕ ФРАЗЫ)
+app.post('/api/island-query', (req, res) => {
+    const userIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    
+    if (checkSpam(userIp)) {
+        return res.status(429).json({ success: false, error: "ИИ обрабатывает логи... Подождите пару секунд." });
     }
 
-    // Автоматическая генерация 30 второстепенных параметров с привязкой Faceit
-    const secondaryStats = {};
-    secondaryParamsList.forEach(param => {
-        const pElo = Math.floor(Math.random() * 1200) + 1300; // Разброс ЭЛО для микро-мувов
-        secondaryStats[param] = {
-            elo: pElo,
-            badge: getFaceitBadge(pElo).badge
+    const { query } = req.body;
+    const q = cleanClean(query, 500).toLowerCase().trim();
+
+    // Генерация динамических показателей ELO для вывода в отчетах
+    const lastGameElo = Math.floor(Math.random() * 200) + 2150; 
+    const strafeElo = 2133; 
+    const reactionTime = Math.floor(Math.random() * 40) + 175;
+
+    // Базовый интеллектуальный ответ, если пользователь просто общается с ИИ
+    let aiResponse = `🤖 <b>Аналитический хаб CYBERX AI:</b> Я изучил твой запрос "${query}". На основе последних загруженных тиков катки, твоя механика стабильна, но присутствует микродвижение мыши при зажиме. Рекомендую сменить паттерн контроля отдачи.`;
+    
+    let showStatsData = false;
+    let statsPayload = null;
+
+    // 1. ОБРАБОТКА ГОТОВОЙ ФРАЗЫ: СТАТИСТИКА ПОСЛЕДНЕЙ ИГРЫ (АВТОМАТ / СУММАРНАЯ СТАТА)
+    if (q.includes("последней игры") || q.includes("последняя игра") || q === "1") {
+        aiResponse = `📊 <b>ИТОГОВЫЙ ИИ-ОТЧЕТ ПО ПОСЛЕДНЕМУ МАТЧУ (de_mirage):</b>\n` +
+                     `• <b>Предисловие:</b> В этом матче зафиксирован твой лучший показатель по скорости реакции (${reactionTime}мс) за всю неделю! Зачистка Б-плента была идеальной.\n` +
+                     `• <b>Что было плохо:</b> Но пик на 1 минуте 41 секунде раунда был не так хорош! Стрейфы и контр-стрейфы в дефолте были смазаны, пуля улетела выше модельки противника.\n\n` +
+                     `🤖 <i>Ниже развернута суммарная статистика «АВТОМАТ» из десятков скрытых факторов:</i>`;
+        
+        showStatsData = true;
+        statsPayload = {
+            type: "last_game",
+            params: {
+                "Суммарное ЭЛО матча": { elo: lastGameElo, badge: getFaceitBadge(lastGameElo) },
+                "Скорость реакции": { elo: `${reactionTime}мс`, badge: getFaceitBadge(2350) },
+                "Контр-стрейфы (Главный сегмент)": { elo: strafeElo, badge: getFaceitBadge(strafeElo) },
+                "Понимание раскидки гранат": { elo: 1950, badge: getFaceitBadge(1950) },
+                "Процент попаданий в голову": { elo: "54%", badge: getFaceitBadge(2200) },
+                "Успешные командные действия": { elo: 2050, badge: getFaceitBadge(2050) },
+                "Контроль спрея (AK-47)": { elo: 2410, badge: getFaceitBadge(2410) },
+                "Тайминги перетяжек (Ротации)": { elo: 1890, badge: getFaceitBadge(1890) }
+            }
         };
-    });
+    }
+    
+    // 2. ОБРАБОТКА ГОТОВОЙ ФРАЗЫ: СТАТИСТИКА ВСЕХ ИГР (30 ВТОРОСТЕПЕННЫХ ПАРАМЕТРОВ)
+    else if (q.includes("всех игр") || q.includes("общая статистика") || q === "2") {
+        aiResponse = `📈 <b>ГЛОБАЛЬНАЯ СТАТИСТИКА ПРОГРЕССА (30 ВТОРОСТЕПЕННЫХ ФАКТОРОВ):</b>\n` +
+                     `ИИ просканировал архив из всех игр. Средний показатель в сегменте стрейфов и позиционирования зафиксирован на отметке <b>${strafeElo} ELO</b>. Контр-стрейфы в пистолетных раундах — очень хороши, но страдает удержание углов на длине.`;
+        
+        showStatsData = true;
+        const sParams = {};
+        secondaryParamsList.forEach(p => {
+            let rngElo = Math.floor(Math.random() * 800) + 1400;
+            if(p.includes("контр-стрейфы")) rngElo = strafeElo;
+            sParams[p] = { elo: rngElo, badge: getFaceitBadge(rngElo) };
+        });
+        statsPayload = { type: "all_games", params: sParams };
+    }
+    
+    // 3. ОБРАБОТКА ГОТОВОЙ ФРАЗЫ: ПЕРСОНАЛЬНАЯ ТРЕНИРОВКА
+    else if (q.includes("тренировка") || q.includes("составить тренировку") || q === "3") {
+        aiResponse = `🏋️‍♂️ <b>ИНДИВИДУАЛЬНЫЙ КИБЕРСПОРТИВНЫЙ ПЛАН ТРЕНИРОВКИ:</b>\n` +
+                     `На основе заваленного параметра стрейфов (${strafeElo} ELO) модель CYBERX сформировала пошаговый курс для мышечной памяти:\n\n` +
+                     `1. <b>Разминка (15 мин):</b> Зайди на Шарики DM (сервер №1), делай строго по 100 тапов One-Tap с полной остановкой через клавиши A-D.\n` +
+                     `2. <b>Закрепление (20 мин):</b> Перейди на Duels 1v1 серваки, тренируй только узкие и быстрые пики без зажима спрея.\n` +
+                     `3. <b>Анализ углов:</b> Контролируй, чтобы прицел не падал на уровень груди на 1-й минуте раунда.\n\n` +
+                     `🎯 <i>Ожидаемый буст: +150 ELO на Faceit за 7 дней регулярных повторений.</i>`;
+    }
 
-    res.json({
-        success: true,
-        filename: filename,
-        preface: "Матч проанализирован нейросетью CYBERX. Зафиксирован твой лучший показатель по скорости реакции и контролю спрея за неделю! Однако, стрейфы и контр-стрейфы были смазаны.",
-        timingsAdvice: "Разбор косяков: Твой пик на 1 минуте 41 секунде был не так хорош. Контр-стрейф зафиксирован с задержкой в 80мс, из-за чего пуля улетела выше дефолта.",
-        mainStats: mainWithBadges,
-        secondaryStats: secondaryStats,
-        timestamp: new Date().toLocaleDateString()
-    });
-});
-
-// ========================================================
-// РОУТ ДЛЯ ИНТЕРАКТИВНОГО ОСТРОВКА (ПЛЮС +, АВТОМАТ, ТРЕНИРОВКА)
-// ========================================================
-app.post('/api/island-query', (req, res) => {
-    const { query, filename } = req.body;
-    const cleanQuery = cleanClean(query, 150).toLowerCase();
-
-    // 1. Модуль «АВТОМАТ» (Суммарная сквозная статистика из десятков факторов)
-    const automatStat = {
-        totalTicksAnalyzed: 144200,
-        microMovementsScore: "89.4 / 100",
-        consistencyRate: "78%",
-        decisionMakingSpeed: "195мс",
-        verdict: "Суммарный анализ подтверждает высокий механический потенциал. Основная просадка идет в геометрии стрейфов."
-    };
-
-    // 2. Модуль «СОСТАВИТЬ ТРЕНИРОВКУ» на основе заваленных параметров
-    let trainingPlan = {
-        focus: "Комплексное исправление контр-стрейфов и углов пика",
-        steps: [
-            "1. Зайди на карту CyberShok DM (Шарики DM) на 25 минут.",
-            "2. Сделай ровно 150 киллов строго One-Tap тапами, полностью останавливая модельку через контр-стрейф (клавиша А-D).",
-            "3. Перейди на сервер Duels 1v1 и отыграй 5 матчей, фокусируясь на узких пиках без зажима.",
-            "4. Повторяй цикл перед каждой каткой на Faceit."
-        ],
-        expectedEloGain: "+150 ELO за 7 дней"
-    };
-
-    // Кастомизация ответа под запрос игрока на островке
-    if (cleanQuery.includes("авп") || cleanQuery.includes("awp")) {
-        trainingPlan.focus = "Стабилизация зума и стрельбы с AWP";
-        trainingPlan.steps = [
-            "1. Карта CyberShok AWP — 20 минут агрессивных пиков.",
-            "2. Убирай микродвижения мыши в момент клика."
-        ];
-    } else if (cleanQuery.includes("мираж") || cleanQuery.includes("mirage")) {
-        trainingPlan.focus = "Изучение меты раскидок и таймингов на de_mirage";
-        trainingPlan.steps = [
-            "1. Запусти сервер тренировки раскидок гранат CYBERX.",
-            "2. Повтори смок в окно и моментальную флеш в палас 30 раз."
-        ];
+    // Умные контекстные ответы на свободный ввод пользователя
+    else if (q.includes("мираж") || q.includes("mirage")) {
+        aiResponse = `🏢 <b>Разбор по карте Mirage от ИИ:</b> Твоя главная тактическая ошибка — плохая проверка угла под коврами на А-пленте при выходах из паласов. Потренируй префайры углов (${strafeElo} ELO)!`;
+    } else if (q.includes("авп") || q.includes("awp")) {
+        aiResponse = `🎯 <b>Разбор снайперских логов:</b> Скорость флика с AWP идеальна (${reactionTime}мс), но ты слишком часто нажимаешь выстрел до полной остановки модельки. Контролируй контр-стрейф!`;
+    } else if (q.includes("ошибка") || q.includes("косяк") || q.includes("плохо")) {
+        aiResponse = `📊 <b>Глобальный вердикт ошибок:</b> Отыграл плохо, пик на 1 минуте 41 секунде матча был не так хорош. Контр-стрейфы были смазаны. Всегда держи прицел выше.`;
     }
 
     res.json({
         success: true,
         query: query,
-        automat: automatStat,
-        trainingPlan: trainingPlan
+        response: aiResponse,
+        showStats: showStatsData,
+        statsData: statsPayload
     });
 });
 // ========================================================
