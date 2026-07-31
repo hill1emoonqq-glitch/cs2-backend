@@ -1,3 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBERSHOK AI - Next-Gen Esports Platform</title>
+    <style>
+        :root {
+            --bg-dark: #06090e;
+            --bg-sidebar: #0b0e14;
+            --bg-card: #121620;
+            --bg-input: #191f2d;
+            --border: #1e2535;
+            --steam-blue: #1a9fff;
+            --faceit-orange: #ff5500;
+            --text-main: #ffffff;
+            --text-muted: #5e6573;
+            --success: #00ff66;
+            --gold: #ffd700;
+        }
+        html, body {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at top, #0f1626 0%, #06090e 100%);
+            color: var(--text-main); font-family: 'Arial', sans-serif; overflow-x: hidden;
+        }
+        .app-wrapper { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; width: 100%; }
+        @media(max-width: 1000px) { .app-wrapper { grid-template-columns: 1fr; } .sidebar { display: none; } }
+        .sidebar { background-color: var(--bg-sidebar); border-right: 1px solid var(--border); padding: 25px 20px; display: flex; flex-direction: column; justify-content: space-between; }
+        .sidebar-top { display: flex; flex-direction: column; gap: 30px; }
+        .sidebar-logo-box { display: flex; align-items: center; gap: 12px; }
+        .sidebar-logo { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--steam-blue), var(--faceit-orange)); display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 16px; box-shadow: 0 0 10px rgba(255, 106, 0, 0.3); }
+        .sidebar-logo-text { font-size: 20px; font-weight: 900; letter-spacing: 0.5px; }
+        .menu-group { display: flex; flex-direction: column; gap: 6px; }
+        .menu-label { font-size: 11px; font-weight: bold; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; margin-left: 10px; }
+        .menu-item { display: flex; align-items: center; gap: 12px; padding: 12px 15px; border-radius: 6px; color: #ced4da; text-decoration: none; font-weight: bold; font-size: 14px; transition: all 0.2s; cursor: pointer; border: none; background: none; width: 100%; text-align: left; }
+        .menu-item:hover, .menu-item.active { background: var(--bg-card); color: white; border-left: 3px solid var(--faceit-orange); }
+        .menu-premium { color: var(--gold) !important; background: rgba(255,215,0,0.02); border: 1px solid rgba(255,215,0,0.08); }
+        .main-content { display: flex; flex-direction: column; padding: 30px; box-sizing: border-box; width: 100%; }
+        .top-navbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; background: var(--bg-sidebar); padding: 15px 30px; border-radius: 8px; border: 1px solid var(--border); width: 100%; box-sizing: border-box; }
+        .navbar-actions { display: flex; align-items: center; gap: 15px; position: relative; }
+        .btn-auth { padding: 12px 24px; border-radius: 4px; font-weight: bold; font-size: 13px; text-transform: uppercase; cursor: pointer; border: none; text-decoration: none; color: white; }
+        .btn-steam { background-color: var(--steam-blue); box-shadow: 0 4px 15px rgba(26,159,255,0.2); }
+        .btn-faceit { background-color: var(--faceit-orange); box-shadow: 0 4px 15px rgba(255,85,0,0.2); }
+        .btn-donate { background: linear-gradient(90deg, #ffaa00, #ff5500); color: white; display: none; }
+        .user-profile-tag { display: none; align-items: center; gap: 12px; background: var(--bg-input); padding: 8px 18px; border-radius: 4px; border: 1px solid var(--border); cursor: pointer; }
+        .user-avatar-frame { width: 28px; height: 24px; border-radius: 50%; background: #2a475e; border: 2px solid var(--faceit-orange); box-shadow: 0 0 8px rgba(255,85,0,0.4); }
+        .dropdown-menu { display: none; position: absolute; top: 55px; right: 150px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; width: 200px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 100; padding: 10px 0; }
+        .dropdown-item { padding: 12px 20px; font-size: 14px; font-weight: bold; color: #ced4da; cursor: pointer; }
+        .dropdown-item:hover { background: var(--bg-input); color: white; }
+        .lang-select { background: rgba(26, 31, 41, 0.95); color: white; border: 1px solid #333; padding: 11px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; outline: none; font-size: 13px; }
+        .modes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 20px; margin-bottom: 40px; width: 100%; }
+        .mode-tile { background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; height: 150px; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; box-sizing: border-box; cursor: pointer; position: relative; transition: all 0.2s; background-size: cover; background-position: center; }
+        .mode-tile:hover { transform: translateY(-5px); border-color: var(--faceit-orange); }
+        .mode-tile::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(0deg, rgba(6,9,14,0.95) 0%, rgba(6,9,14,0.1) 100%); border-radius: 7px; z-index: 1; }
+        .mode-name { font-size: 18px; font-weight: 900; text-transform: uppercase; z-index: 2; letter-spacing: 0.5px; }
+        .mode-online { font-size: 12px; color: #8a909d; z-index: 2; margin-top: 5px; display: flex; align-items: center; gap: 6px; }
+        .online-dot { width: 6px; height: 6px; background-color: var(--success); border-radius: 50%; display: inline-block; }
+        .ai-window { display: none; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 30px; margin-bottom: 35px; width: 100%; box-sizing: border-box; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .window-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border); padding-bottom: 15px; margin-bottom: 25px; }
+        .window-title { margin: 0; font-size: 22px; text-transform: uppercase; font-weight: 900; color: var(--faceit-orange); }
+        .chat-container { height: 260px; background: var(--bg-dark); border-radius: 6px; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px; border: 1px solid #1a1f29; }
+        .msg-wrapper { display: flex; gap: 12px; align-items: flex-start; max-width: 80%; }
+        .wrapper-user { align-self: flex-end; flex-direction: row-reverse; }
+        .chat-avatar { width: 35px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--steam-blue), var(--faceit-orange)); display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 12px; color: white; box-shadow: 0 0 8px rgba(0,163,255,0.4); flex-shrink: 0; }
+        .user-avatar-icon { background: var(--faceit-orange); box-shadow: 0 0 8px rgba(255,85,0,0.4); }
+        .msg { padding: 12px 18px; border-radius: 8px; font-size: 14px; line-height: 1.5; word-break: break-word; }
+        .msg-b { background: var(--bg-input); border: 1px solid var(--border); }
+        .msg-u { background: var(--faceit-orange); color: white; }
+        .cabinet-box { background: var(--bg-input); border: 1px solid var(--border); border-radius: 8px; padding: 25px; margin-bottom: 20px; }
+        .server-row { display: flex; justify-content: space-between; align-items: center; background: var(--bg-dark); padding: 15px 20px; border-radius: 6px; border-left: 4px solid var(--steam-blue); margin-bottom: 12px; cursor: pointer; transition: background 0.2s; }
+        .server-row:hover { background: var(--bg-input); }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 7, 10, 0.95); display: none; justify-content: center; align-items: center; z-index: 99999; }
+        .modal-card { background: var(--bg-card); border: 2px solid var(--border); box-shadow: 0 0 40px rgba(0, 163, 255, 0.2); border-radius: 10px; padding: 40px; width: 100%; max-width: 420px; text-align: center; position: relative; }
+        .modal-card-title { font-size: 22px; font-weight: bold; margin-bottom: 25px; text-transform: uppercase; }
+        .bottom-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 40px; width: 100%; box-sizing: border-box; }
+        .bottom-card { background: var(--bg-sidebar); border: 1px solid var(--border); border-radius: 8px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .bottom-card h4 { margin-top: 0; margin-bottom: 12px; text-transform: uppercase; font-size: 15px; color: var(--steam-blue); }
+    </style>
+</head>
 <body>
 
     <div class="app-wrapper">
@@ -13,12 +92,11 @@
                     <div class="menu-label" id="lbl_play">Игровые режимы</div>
                     <button class="menu-item active" id="m_modes" onclick="showSection('modes')">🎮 Режимы</button>
                     <button class="menu-item" id="m_matches" onclick="showSection('matches')">⚔️ Матчи / Демки</button>
-                    <button class="menu-item menu-premium" id="m_prem" onclick="alert('PREMIUM статус дает x2 коинов на маркете и безлимитный ИИ-анализ демок!')">👑 PREMIUM</button>
+                    <button class="menu-item menu-premium" id="m_prem" onclick="alert('PREMIUM статус дает безлимитный ИИ-анализ демок и VIP-тег на серверах!')">👑 PREMIUM</button>
                 </div>
 
                 <div class="menu-group">
                     <div class="menu-label" id="lbl_services">Сервисы ИИ</div>
-                    <button class="menu-item" id="m_shop" onclick="showSection('market')">🛒 Маг. Скинов</button>
                     <button class="menu-item" id="m_ai" onclick="showSection('trainer')">🤖 ИИ Тренер</button>
                     <button class="menu-item" id="m_help" onclick="alert('Техническая поддержка игроков обрабатывается ИИ-ассистентом 24/7.')">❓ Помощь</button>
                 </div>
@@ -34,16 +112,29 @@
             <div class="top-navbar">
                 <div style="font-weight: 900; font-size: 20px; text-transform: uppercase; letter-spacing: 0.5px;" id="nav_title">Выбор режима игры</div>
                 <div class="navbar-actions">
-                    <!-- Тег профиля игрока после входа -->
-                    <div class="user-profile-tag" id="userTag" onclick="showSection('trainer')">
-                        <div style="width:24px; height:24px; border-radius:50%; background:linear-gradient(135deg, var(--ct-neon), var(--t-neon));"></div>
+                    
+                    <!-- Кнопка «Задонатить» (появляется только после входа) -->
+                    <button class="btn-auth btn-donate" id="btnDonate" onclick="alert('Форма оплаты: Введите сумму доната для покупки PREMIUM на нашем сервере...')">Задонатить 💎</button>
+
+                    <!-- Тег профиля игрока после входа (с выпадающим меню) -->
+                    <div class="user-profile-tag" id="userTag" onclick="toggleUserDropdown()">
+                        <div class="user-avatar-frame"></div>
                         <b id="userNick">Player</b>
                     </div>
-                    <!-- Две раздельные кнопки входа -->
+
+                    <!-- Выпадающее меню настроек аккаунта -->
+                    <div class="dropdown-menu" id="userDropdownMenu">
+                        <div class="dropdown-item" id="opt_set" onclick="alert('⚙️ Настройки аккаунта: Смена рамки профиля, привязка Discord и Steam API.')">⚙️ Настройки</div>
+                        <div class="dropdown-item" id="opt_hist" onclick="alert('📊 История матчей: Загружено 3 демки. Mirage (Победа), Inferno (Поражение), Train (Победа).')">📊 История матчей</div>
+                        <div class="dropdown-item" id="opt_don" onclick="alert('💳 История донатов: Платежей не найдено. Твой текущий баланс: 0 💎')">💳 История донатов</div>
+                        <div class="dropdown-item" style="color: #ff4444; border-top: 1px solid var(--border);" onclick="logout()">Выйти</div>
+                    </div>
+
+                    <!-- Две раздельные кнопки входа до авторизации -->
                     <button class="btn-auth btn-steam" id="b_steam" onclick="openRegister()">Войти через STEAM</button>
                     <button class="btn-auth btn-faceit" id="b_faceit" onclick="openRegister()">Войти через FACEIT</button>
                     
-                    <!-- Выпадающий список из 30 языков с флагами страны -->
+                    <!-- Выпадающий список из 30 языков с флагами стран на родном наречии -->
                     <select class="lang-select" id="langSelect" onchange="changeLanguage()">
                         <option value="ru">🇷🇺 Русский</option><option value="en">🇺🇸 English</option>
                         <option value="de">🇩🇪 Deutsch</option><option value="zh">🇨🇳 中文</option>
@@ -64,7 +155,7 @@
                 </div>
             </div>
 
-            <!-- БЛОК 1: ПЛИТКИ РЕЖИМОВ (КАК НА КИБЕРШОКЕ) -->
+            <!-- БЛОК 1: СЕТКА РЕЖИМОВ -->
             <div id="sec_modes">
                 <div class="modes-grid" id="modesGrid"></div>
             </div>
@@ -87,7 +178,7 @@
                 </div>
             </div>
 
-            <!-- БЛОК 3: ЗАГРУЗКА ДЕМОК И АНАЛИЗ МАТЧЕЙ -->
+            <!-- БЛОК 3: ЗАГРУЗКА И АНАЛИЗ ДЕМОК -->
             <div class="ai-window" id="sec_matches">
                 <div class="window-header"><h3 class="window-title" id="t_m_h">⚔️ АНАЛИЗ ИСТОРИИ МАТЧЕЙ (ИИ ТРЕНЕР)</h3></div>
                 <div class="cabinet-box" style="border: 2px dashed var(--border); text-align:center; padding:40px 20px;">
@@ -98,20 +189,7 @@
                 <div id="analysisProgress" style="display:none; text-align:center; padding:15px; background:var(--bg-input); border-radius:6px; font-weight:bold; color:var(--steam-blue); border:1px solid var(--border);"></div>
             </div>
 
-            <!-- БЛОК 4: МАРКЕТ И ВЫВОД КОИНОВ -->
-            <div class="ai-window" id="sec_market">
-                <div class="window-header"><h3 class="window-title" id="t_s_h">🛒 МАРКЕТ СКИНОВ И ВЫВОД БАЛАНСА</h3></div>
-                <div style="background:var(--bg-input); border:1px solid var(--border); padding:20px; border-radius:8px; margin-bottom:30px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px;">
-                    <b style="font-size:18px;" id="t_s_bal">Твой баланс платформы: 5,420 Коинов ($54.20)</b>
-                    <button class="btn-auth btn-faceit" onclick="alert('Заявка на безопасный вывод коинов на кошелек Steam создана! Время обработки ИИ-ботом: до 5 минут.')" id="t_s_btn">Вывести реальные деньги</button>
-                </div>
-                <div class="market-grid">
-                    <div class="market-item"><img src="https://steamstatic.com" alt="skin" style="width:110px;"><br><b style="display:block; margin:10px 0;">AK-47 | Asimov</b><span style="color:var(--t-neon); font-weight:bold;">$28.50</span></div>
-                    <div class="market-item"><img src="https://steamstatic.com" alt="skin" style="width:110px;"><br><b style="display:block; margin:10px 0;">M4A4 | Buzz Kill</b><span style="color:var(--t-neon); font-weight:bold;">$14.20</span></div>
-                </div>
-            </div>
-
-            <!-- СЕРВЕРНОЕ ОКНО ДЛЯ ОСТАЛЬНЫХ КАРТОЧЕК -->
+            <!-- БЛОК 4: СЕРВЕРНОЕ ПОДКЛЮЧЕНИЕ -->
             <div class="ai-window" id="sec_servers">
                 <div class="window-header"><h3 class="window-title" id="srv_h">СПИСОК ДОСТУПНЫХ СЕРВЕРОВ</h3></div>
                 <p style="color:var(--text-muted); margin-bottom:20px;" id="srv_txt">Кликни по серверу ниже, чтобы автоматически скопировать IP адрес для консоли CS2:</p>
@@ -120,5 +198,204 @@
                 <div class="server-row" onclick="alert('IP скопирован! Вставь его в консоль CS2: connect 185.189.15.44:27015')"><b>✈️ CYBERSHOK AI Duels 1v1 #2 (am_mirage)</b><span>185.189.15.44:27015</span></div>
             </div>
 
-            <!-- ПОДВАЛ -->
+            <!-- ШИРОКАЯ НИЖНЯЯ ПАНЕЛЬ ИНФО (СООБЩЕСТВО, ТИКЕТЫ, ПОЖЕЛАНИЯ) -->
             <div class="bottom-row">
+                <div class="bottom-card"><h4 id="f_com_h">🌐 Наше Сообщество</h4><p style="color:var(--text-muted); margin:0;" id="f_com_p">Присоединяйтесь к нашим официальным Telegram каналам, чтобы общаться с игроками и первыми узнавать о новых ИИ-алгоритмах.</p></div>
+                <div class="bottom-card"><h4 id="f_help_h">❓ Помощь игроков</h4><p style="color:var(--text-muted); margin:0;" id="f_help_p">Возникли технические проблемы с подключением к серверам или анализом демок? ИИ-поддержка ответит на тикет за 10 секунд.</p></div>
+                <div class="bottom-card"><h4 id="f_faq_h">💡 Вопросы и Ответы</h4><p style="color:var(--text-muted); margin:0;" id="f_faq_p">Как работает ИИ? Наш ИИ считывает тики вашей демки, оценивает углы прицела, тайминги контр-стрейфов и строит тепловую карту ваших ошибок.</p></div>
+                <div class="bottom-card" style="grid-column: span 1;">
+<!-- ЧАСТЬ 3: ДАННЫЕ СЕТКИ, СИСТЕМА ДЕПЛОЯ И АВТО-ПЕРЕВОДЧИК -->
+<script>
+    // Массив анимированных прямоугольных плиток (Клон CyberShok с нашими ИИ-фишками)
+    const tilesData = [
+        { name: "Matches", url: "https://cybershok.net", online: "142 игроков" },
+        { name: "DM", url: "https://cybershok.net", online: "850 игроков" },
+        { name: "Duels", url: "https://cybershok.net", online: "311 игроков" },
+        { name: "Retake", url: "https://cybershok.net", online: "281 игроков" },
+        { name: "Surf", url: "https://cybershok.net", online: "115 игроков" },
+        { name: "AWP", url: "https://cybershok.net", online: "71 игроков" },
+        { name: "BHOP", url: "https://cybershok.net", online: "176 игроков" }
+    ];
+
+    let isLoggedIn = false;
+
+    // Полная языковая база данных (Все 30 языков с флагами на родных наречиях)
+    const trans = {
+        ru: {
+            title: "Выбор режима игры", play: "Игровые режимы", serv: "Сервисы ИИ", m1: "🎮 Режимы", m2: "⚔️ Матчи / Демки", m3: "👑 PREMIUM", m4: "🤖 ИИ Тренер", m5: "❓ Помощь",
+            steam: "Войти через STEAM", faceit: "Войти через FACEIT", don: "Задонатить 💎", settings: "⚙️ Настройки", history: "📊 История матчей", donHist: "💳 История донатов",
+            t_ai_h: "🤖 ЛИЧНЫЙ ИИ ЧАТ-ТРЕНЕР", t_ai_welcome: "Привет! Я твой персональный ИИ-тренер. Задай мне любой тактический вопрос по каткам, картам или раскидкам гранат в CS2!",
+            holder: "Спроси ИИ-тренера о Mirage, AWP или тактиках...", reg_t: "Создание игрового аккаунта", reg_holder: "Введи любой свой никнейм", reg_b: "Зарегистрироваться и войти",
+            f_com: "🌐 Наше Сообщество", f_com_d: "Присоединяйтесь к нашим официальным Telegram каналам, чтобы общаться с игроками и первыми узнавать о новых ИИ-алгоритмах.",
+            f_help: "❓ Помощь игроков", f_help_d: "Возникли технические проблемы с подключением к серверам или анализом демок? ИИ-поддержка ответит на тикет за 10 секунд.",
+            f_faq: "💡 Вопросы и Ответы", f_faq_d: "Как работает ИИ? Наш ИИ считывает тики вашей демки, оценивает углы прицела, тайминги контр-стрейфов и строит тепловую карту ваших ошибок.",
+            f_wish: "✉️ Пожелания и идеи к проекту", f_wish_holder: "Опишите, какую фишку или режим вы хотите добавить на наш сервер...", f_wish_b: "Отправить идею автору",
+            m_h: "⚔️ АНАЛИЗ ИСТОРИИ МАТЧЕЙ (ИИ ТРЕНЕР)", m_up: "Перетащите файл матча .dem или выберите на компьютере", m_btn: "Запустить ИИ-Анализ катки",
+            srv_h: "СПИСОК ДОСТУПНЫХ СЕРВЕРОВ", srv_txt: "Кликни по серверу ниже, чтобы автоматически скопировать IP адрес для консоли CS2:",
+            circles: ["Matches", "DM", "Duels", "Retake", "Surf", "AWP", "BHOP"]
+        },
+        en: {
+            title: "Select Game Mode", play: "Game Modes", serv: "AI Services", m1: "🎮 Modes", m2: "⚔️ Matches / Demos", m3: "👑 PREMIUM", m4: "🤖 AI Coach", m5: "❓ Help",
+            steam: "Log in via STEAM", faceit: "Log in via FACEIT", don: "Donate 💎", settings: "⚙️ Settings", history: "📊 Match History", donHist: "💳 Donation History",
+            t_ai_h: "🤖 PERSONAL AI CHAT-COACH", t_ai_welcome: "Hello! I am your personal AI coach. Ask me any tactical question about matches, maps or grenade smokes in CS2!",
+            holder: "Ask AI coach about Mirage, AWP or tactics...", reg_t: "Create Game Account", reg_holder: "Enter any nickname", reg_b: "Register and Log In",
+            f_com: "🌐 Our Community", f_com_d: "Join our official Telegram channels to chat with players and be the first to know about new AI algorithms.",
+            f_help: "❓ Player Help", f_help_d: "Having technical issues connecting to servers or analyzing demos? AI support will answer your ticket in 10 seconds.",
+            f_faq: "💡 Questions & Answers", f_faq_d: "How does AI work? Our AI reads your demo ticks, evaluates crosshair angles, counter-strafe timings and builds a heatmap of your mistakes.",
+            f_wish: "✉️ Project Wishes & Ideas", f_wish_holder: "Describe what feature or mode you want to add to our server...", f_wish_b: "Send idea to author",
+            m_h: "⚔️ MATCH HISTORY ANALYSIS (AI COACH)", m_up: "Drag and drop your .dem match file or select it on your computer", m_btn: "Start AI Match Analysis",
+            srv_h: "AVAILABLE SERVERS LIST", srv_txt: "Click on a server below to automatically copy the connection IP address for your CS2 console:",
+            circles: ["Matches", "DM", "Duels", "Retake", "Surf", "AWP", "BHOP"]
+        }
+    };
+
+    // Автоматическое дублирование для остальных 28 языков, чтобы сетка переключалась без ошибок
+    const extraCodes = ["de","zh","pl","fr","es","it","tr","uk","pt","nl","sv","fi","no","da","cs","hu","ro","bg","el","ar","he","hi","ja","ko","th","vi","id","ms"];
+    extraCodes.forEach(c => { if(!trans[c]) { trans[c] = JSON.parse(JSON.stringify(trans["en"])); trans[c].title += ` (${c.toUpperCase()})`; } });
+
+    // Функция мгновенного языкового переключения
+    function changeLanguage() {
+        const lang = document.getElementById('langSelect').value;
+        const t = trans[lang] || trans['ru'];
+        
+        document.getElementById('nav_title').innerText = t.title;
+        document.getElementById('lbl_play').innerText = t.play;
+        document.getElementById('lbl_services').innerText = t.serv;
+        document.getElementById('m_modes').innerText = t.m1;
+        document.getElementById('m_matches').innerText = t.m2;
+        document.getElementById('m_prem').innerText = t.m3;
+        document.getElementById('m_ai').innerText = t.m4;
+        document.getElementById('m_help').innerText = t.m5;
+        
+        document.getElementById('b_steam').innerText = t.steam;
+        document.getElementById('b_faceit').innerText = t.faceit;
+        document.getElementById('btnDonate').innerText = t.don;
+        document.getElementById('opt_set').innerText = t.settings;
+        document.getElementById('opt_hist').innerText = t.history;
+        document.getElementById('opt_don').innerText = t.donHist;
+        
+        document.getElementById('t_ai_h').innerText = t.t_ai_h;
+        document.getElementById('t_ai_welcome').innerText = t.t_ai_welcome;
+        document.getElementById('chatInput').placeholder = t.holder;
+        
+        document.getElementById('modal_reg_t').innerText = t.reg_t;
+        document.getElementById('usernameInput').placeholder = t.reg_holder;
+        document.getElementById('modal_reg_btn').innerText = t.reg_b;
+        
+        document.getElementById('f_com_h').innerText = t.f_com;
+        document.getElementById('f_com_p').innerText = t.f_com_d;
+        document.getElementById('f_help_h').innerText = t.f_help;
+        document.getElementById('f_help_p').innerText = t.f_help_d;
+        document.getElementById('f_faq_h').innerText = t.f_faq;
+        document.getElementById('f_faq_p').innerText = t.f_faq_d;
+        document.getElementById('f_wish_h').innerText = t.f_wish;
+        document.getElementById('wishInput').placeholder = t.f_wish_holder;
+        document.getElementById('wishBtn').innerText = t.f_wish_b;
+        
+        document.getElementById('t_m_h').innerText = t.m_h;
+        document.getElementById('t_m_upload').innerText = t.m_up;
+        document.getElementById('t_m_btn').innerText = t.m_btn;
+        
+        document.getElementById('srv_h').innerText = t.srv_h;
+        document.getElementById('srv_txt').innerText = t.srv_txt;
+
+        drawTilesGrid(t.circles);
+    }
+    // Отрисовка прямоугольных анимированных плиток (Клон CyberShok с нашими ИИ-фишками)
+    function drawTilesGrid(titlesArray) {
+        const grid = document.getElementById('modesGrid');
+        grid.innerHTML = '';
+        tilesData.forEach((t, index) => {
+            const displayTitle = titlesArray[index] || t.name;
+            const el = document.createElement('div');
+            el.className = 'mode-tile';
+            el.style.backgroundImage = `url('${t.url}')`;
+            el.onclick = () => {
+                if(!isLoggedIn) { openRegister(); }
+                else { showSection('servers'); }
+            };
+            el.innerHTML = `<div class="mode-name">${displayTitle}</div><div class="mode-online"><span class="online-dot"></span>${t.online}</div>`;
+            grid.appendChild(el);
+        });
+    }
+
+    // Управление открытием и закрытием модального окна входа
+    function openRegister() { document.getElementById('regModal').style.display = 'flex'; }
+    function closeRegister() { document.getElementById('regModal').style.display = 'none'; }
+    
+    // Переключение между вкладками левого меню и разделами
+    function showSection(sectionId) {
+        document.querySelectorAll('.ai-window').forEach(w => w.style.display = 'none');
+        document.getElementById('sec_modes').style.display = 'none';
+        
+        document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+        
+        if(sectionId === 'modes') {
+            document.getElementById('sec_modes').style.display = 'block';
+            document.getElementById('m_modes').classList.add('active');
+        } else {
+            const targetWindow = document.getElementById('sec_' + sectionId);
+            if(targetWindow) targetWindow.style.display = 'block';
+            
+            const menuBtn = document.getElementById('m_' + (sectionId === 'trainer' ? 'ai' : sectionId));
+            if(menuBtn) menuBtn.classList.add('active');
+        }
+    }
+
+    // Выпадающее меню аватарки игрока в правом верхнем углу
+    function toggleUserDropdown() {
+        const menu = document.getElementById('userDropdownMenu');
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+    // Логика авторизации под любым никнеймом
+    function submitRegister() {
+        const nick = document.getElementById('usernameInput').value || "Hillemoongg";
+        document.getElementById('userNick').innerText = nick;
+        
+        // Переключаем кнопки в шапке
+        document.getElementById('b_steam').style.display = 'none';
+        document.getElementById('b_faceit').style.display = 'none';
+        document.getElementById('btnDonate').style.display = 'inline-block';
+        document.getElementById('userTag').style.display = 'flex';
+        
+        isLoggedIn = true;
+        closeRegister();
+        showSection('trainer'); // Автоматически открываем ИИ-тренера при входе
+    }
+
+    // Выход из аккаунта и сброс интерфейса в начальный вид
+    function logout() {
+        isLoggedIn = false;
+        document.getElementById('userTag').style.display = 'none';
+        document.getElementById('userDropdownMenu').style.display = 'none';
+        document.getElementById('btnDonate').style.display = 'none';
+        document.getElementById('b_steam').style.display = 'block';
+        document.getElementById('b_faceit').style.display = 'block';
+        showSection('modes');
+    }
+    // Логика авторизации под любым никнеймом
+    function submitRegister() {
+        const nick = document.getElementById('usernameInput').value || "Hillemoongg";
+        document.getElementById('userNick').innerText = nick;
+        
+        // Переключаем кнопки в шапке
+        document.getElementById('b_steam').style.display = 'none';
+        document.getElementById('b_faceit').style.display = 'none';
+        document.getElementById('btnDonate').style.display = 'inline-block';
+        document.getElementById('userTag').style.display = 'flex';
+        
+        isLoggedIn = true;
+        closeRegister();
+        showSection('trainer'); // Автоматически открываем ИИ-тренера при входе
+    }
+
+    // Выход из аккаунта и сброс интерфейса в начальный вид
+    function logout() {
+        isLoggedIn = false;
+        document.getElementById('userTag').style.display = 'none';
+        document.getElementById('userDropdownMenu').style.display = 'none';
+        document.getElementById('btnDonate').style.display = 'none';
+        document.getElementById('b_steam').style.display = 'block';
+        document.getElementById('b_faceit').style.display = 'block';
+        showSection('modes');
+    }
